@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////
-const socket = io('74.207.230.69:3000')
+const socket = io('74.207.230.69')
 var user 
 
 const foods = [{"name": "Filé Mignon", "preco":25, "id":0, "img": "comida.jpg"}, {"name": "Picanha", "preco":30, "id":1, "img": "comida2.png"}]
