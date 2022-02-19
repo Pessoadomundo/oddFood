@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="apple-touch-icon" href="icon.png">
+    <link rel="apple-touch-startup-image" href="launch.png">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>OddFood</title>
+    <link rel="shortcut icon" href="icon.png">
+    <!------------------------------------------------------------------------------------------>
+    <script defer src="https://af62-2804-14c-5b95-8d6d-2c36-7ae8-e80-7d07.sa.ngrok.io/socket.io/socket.io.js"></script>
+    <script defer src="script.js"></script>
+</head>
+<body ontouchstart="">
+    <div id="trans"></div>
+    <div id="tela1">
+        <div id="topo">
+            <img src="icon.png" id="logo">
+        </div>
+        <div id="baixo">
+            <div id="login">
+                <form>
+                    <h1 id="loginTitle"><b>Login</b></h1>
+                    <input type="email" id="email" placeholder="Email"><br>
+                    <input type="password" id="senha" placeholder="Senha"><br>
+                    <button id="enviar" type="button">Login</button>
+                    <h4 id="result"></h4>
+                    <button id="registrar" type="button">Registrar</button>
+                    <button id="tutorial" type="button">Como usar</button>
+                </form>
+            </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    
+    <div id="tela2">
+        <div id="daBarra2">
+            <div id="barra2">
+                <span id="saldo">Saldo: R$800,00</span>
+                <img id="plus" src="plus.png">
+            </div>
+        </div>
+            <div id="container">
+                <div id="comidas">
+                
+                </div>
+            </div>
+
+            <div id="container2">
+                <h1 id="tituloCarrinho">Carrinho</h1>
+                <div id="itensCarrinho">
+
+                </div>
+                <h1 id="totalValue">Total: R$80,00</h1>
+                <div id="paymentOptions">
+                    <span id="payNow" class="paymentOption">Pagar agora</span>
+                    <span id="useBalance" class="paymentOption">Usar saldo</span>
+                </div>
+            </div>
+
+            <div id="container3">
+                <img id="pfp" src="profileBlack.png">
+                <h1>Pedidos pendentes:</h1>
+                <div id="pendingItems">
+
+                </div>
+            </div>
+
+        <div id="daBarra">
+            <div id="barra">
+                <div id="divBag">
+                    <img id="bag" src="bag.png">
+                </div>
+                <div id="divCarrinho">
+                    <img id="carrinho" src="carrinho.png">
+                </div>
+                <div id="divPerfil">
+                    <img id="perfil" src="profile.jpg">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div id="tela3">
+        <h1 id="backFromAdd">◄</h1>
+        <h1 id="addMoneyTitle">Adicionar Saldo</h1>
+        <img id="pixImg" src="pix.png">
+        <h1 id="currentMoney"></h1>
+        <br>
+        <h1 id="addMoney">Adicionar quantia</h1>
+    </div>
+
+    <div id="pagamentoDiv">
+        <div id="pagamento">
+            <h1>Pagar Pix</h1>
+            <img src="qrcode">
+            <p>Chave Pix: v0uf0r0932u0f23u0f92390<img id="copySymbol" src="copy.png"></p>
+        </div>
+    </div>
+
+    <div id="notificationDiv">
+        <p id="notificationText">Pagamento aprovado com sucesso</p>
+    </div>
+
+
+
+    <style>
+        body {
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            padding: 0%;
+            margin: 0%;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        #logo{
+            width: 50vw;
+            height: 50vw;
+        }
+        #topo{
+            height: 20vh;
+            text-align: center;   
+            display: flex;         
+            justify-content:center;
+            align-items:flex-end;
+        }
+        #baixo{
+            background-color: black;
+            height: 80vh;
+            display: flex;
+            text-align: center;
+            justify-content:center;
+            align-items: center;
+        }
+        #login{
+            text-align: center;
+            width: 100%;
+            display: block;
+        }
+        form{
+            width: 100%;
+        }
+        #email{
+            width: 70%;
+            height: 1rem;
+            font-size: 1rem;
+            margin-bottom: 0.8rem;
+        }
+        #senha{
+            width: 70%;
+            height: 1rem;
+            font-size: 1rem;
+            margin-bottom: 1.2rem;
+        }
+        #enviar{
+            width: 50%;
+            border: solid white;
+            border-radius: 17px;
+            background-color: white;
+            color: black;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+        #enviar:hover{
+            background-color: black;
+            color: white;
+            border: solid darkslategrey 2px;
+        }
+        #loginTitle{
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        #registrar{
+            width: 50%;
+            border: solid white;
+            border-radius: 17px;
+            background-color: white;
+            color: black;
+            font-size: 1rem;
+            font-weight: bold;
+            margin-top: 40%;
+        }
+        #tutorial{
+            width: 50%;
+            border: solid white;
+            border-radius: 17px;
+            background-color: white;
+            color: black;
+            font-size: 1rem;
+            font-weight: bold;
+            margin-top: 10%;
+        }
+        #registrar:hover{
+            background-color: black;
+            color: white;
+            border: solid darkslategrey 2px;
+        }
+        #tutorial:hover{
+            background-color: black;
+            color: white;
+            border: solid darkslategrey 2px;
+        }
+        #result{
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        
+        #trans{
+            background-color: white;
+            width: 100%;
+            height: 0;
+            display: inline-block;
+        }
+        @keyframes animation{
+            from {height: 0vh;}
+            to {height: 120vh;}
+        }
+        @keyframes animation2{
+            from {opacity: 0%;}
+            to {opacity: 100%;}
+        }
+        #daBarra{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            position: fixed;
+            bottom: 5%;
+        }
+        #barra{
+            width: 90%;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: solid black 10px;
+            border-radius: 20px;
+        }
+        #divBag{
+            width: 33%;
+            color: white;
+            display: inline-block;
+            text-align: center;
+        }
+        #divCarrinho{
+            width: 33%;
+            display: inline-block;
+            text-align: center;
+        }
+        #divPerfil{
+            width: 33%;
+            display: inline-block;
+            text-align: center;
+        }
+        #bag{
+            width: 50%;
+            border-top: solid black 10px;
+            border-bottom: solid black 10px;
+            border-top: white 5px solid;
+        }
+        #carrinho{
+            width: 50%;
+            border-top: solid black 10px;
+            border-bottom: solid black 10px;
+        }
+        #perfil{
+            width: 50%;
+            border-top: solid black 10px;
+            border-bottom: solid black 10px;
+        }
+        #daBarra2{
+            position: fixed;
+            width: 100%;
+            height: 10%;
+            display: flex;
+            justify-content: center;
+            top: 0%;
+        }
+        #barra2{
+            background-color: black;
+            width: 90%;
+            border: solid black 10px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+        }
+        #saldo{
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            border-right: black 25px solid;
+            border-left: black 10px solid;
+        }
+        #plus{
+            height: 2.5rem;
+            float: right;
+        }
+        #comidas{
+            width: 100%;
+            height: 100%;
+            margin-top: 20%;
+            margin-bottom: 30%;
+        }
+        .comida{
+            width: 100%;
+            height: 20vh;
+            border-bottom: grey 1px solid; 
+        }
+        .divImgComida{
+            width: 50%;
+            height: 100%;
+            display: inline-block;
+        }
+        .divInfoComida{
+            width: 40%;
+            height: 100%;
+            display: inline-block;
+            margin-left: auto;
+        }
+        .imgComida{
+            width: 100%;
+        }
+        .nomeComida{
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .preco{
+            font-size: 1.3rem;
+        }
+        .addToCart{
+            align-self: center;
+            width: 20%;
+            margin-left: 40%;
+        }
+        #tituloCarrinho{
+            font-size: 2.3rem;
+            text-align: center;
+        }
+        .minusSign{
+            height: 1.5rem;
+        }
+        .plusSign{
+            height: 1.5rem;
+        }
+        #totalValue{
+            text-align: center;
+            font-size: 1.8rem;
+        }
+        #paymentOptions{
+            text-align: center;
+        }
+        .paymentOption{
+            color: white;
+            background-color: black;
+            font-size: 1.5rem;
+            border: 10px solid black;
+            border-radius: 10px;
+            margin-left: 5%;
+            margin-right: 5%;
+        }
+        #pfp{
+            background-color: grey;
+            border: 5px lightgray solid;
+            border-radius: 50%;
+            margin-left: 18%;
+        }
+        #pendingItems{
+
+        }
+        .pendingItem{
+            width: 100%;
+            height: 20vh;
+            border-top: grey 1px solid; 
+            border-bottom: grey 1px solid; 
+        }
+        #backFromAdd{
+            background-color: black;
+            color: white;
+            border: 10px black solid;
+            border-radius: 50%;
+            position: fixed;
+            top: 0%;
+            left: 5%;
+        }
+        #addMoneyTitle{
+            margin-top: 20%;
+            margin-bottom: 10%;
+            
+        }
+        #pixImg{
+            width: 60%;
+        }
+        #currentMoney{
+            font-size: 1.5rem;
+            margin-bottom: 10%;
+        }
+        #moneyInput{
+            height: 1.5rem;
+            font-size: 1.4rem;
+            width: 70%;
+            margin-bottom: 5%;
+        }
+        #addMoney{
+            background-color: black;
+            color: white;
+            border: 10px black solid;
+            border-radius: 20px;
+            font-size: 1.3rem;
+            width: 60%;
+            margin-left: 17%;
+        }
+        #container{
+
+        }
+        #container2{
+            display: none;
+            margin-top: 20%;
+            margin-bottom: 40%;
+        }
+        #container3{
+            display: none;
+            margin-top: 20%;
+            margin-bottom: 40%;
+        }
+        #tela2{
+            display: none;
+        }
+        #tela3{
+            display: none;
+            text-align: center;
+            align-items: center;
+        }
+        #pagamentoDiv{
+            display: none;
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(150, 150, 150, 50%);
+            text-align: center;
+        }
+        #pagamento{
+            background-color: white;
+            width: 70%;
+            height: 60%;
+            border: 10px white solid;
+            border-radius: 30px;
+            text-align: center;
+            margin-left: 12%;
+            margin-top: 20%;
+        }
+        #copySymbol{
+            width: 1rem;
+            background-color: rgb(230, 230, 230);
+            border: 5px solid rgb(230, 230, 230);
+            border-radius: 5px;
+        }
+        #notificationDiv{
+            display: none;
+            position: fixed;
+            top: 5%;
+            left: 5%;
+            width: 85%;
+            background-color: lightgreen;
+            color: white;
+            border: lightgreen solid 10px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+        @keyframes notification{
+            0% {opacity: 0%;top: 10%;}
+            17% {opacity: 100%;top:5%;}
+            80% {opacity: 100%;top:5%;}
+            100% {opacity: 0%;top: 10%;}
+        }
+        
+        
+    </style>
+</body>
+</html>
