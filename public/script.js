@@ -1,6 +1,5 @@
 ///////////////////////////////////////////////////////////////
-const socket = io('https://af62-2804-14c-5b95-8d6d-2c36-7ae8-e80-7d07.sa.ngrok.io')
-
+const socket = io('74.207.230.69')
 var user 
 
 const foods = [{"name": "Filé Mignon", "preco":25, "id":0, "img": "comida.jpg"}, {"name": "Picanha", "preco":30, "id":1, "img": "comida2.png"}]
