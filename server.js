@@ -12,7 +12,7 @@ fetch(url, options)
   .catch(err => console.error('error:' + err));
 
 
-/*
+
 
 const _pix = require('faz-um-pix');
 
@@ -24,7 +24,7 @@ const qrcode = _pix.Pix("+5531988088186", "Gabriel Jota Lizardo", "Belo Horizont
 console.log(code)
 console.log(qrcode)
 
-*/
+
 
 
 const cons = require('consolidate');
