@@ -90,7 +90,7 @@ app.get('/pagamento', function (req, res){
 
 
 
-server.listen(8080)
+server.listen(80)
 
 io.on('connection', socket => {  
   let id = socket.id
