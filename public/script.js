@@ -2,6 +2,8 @@
 const socket = io('74.207.230.69')
 var user 
 
+var type = 0
+
 const stripePublicKey = "pk_test_51KZzt1AjuYDFXhq9tiVpve2kGVnQS2vk1aT4cbzeScIvsZXyJ9Hbky3uBnsvI6lgj9ONBJu7XXTId6dlrUZVTodf00y4vIG0DN"
 
 const foods = [{"name": "Filé Mignon", "preco":25, "id":0, "img": "comida.jpg"}, {"name": "Picanha", "preco":30, "id":1, "img": "comida2.png"}]
@@ -297,8 +299,9 @@ perfil.addEventListener("click", ()=>{
 
 addMoney.addEventListener("click", ()=>{
     pagamentoDiv.style.display = "block"
+    type = 2
     stripeHandler.open({
-        amount: document.getElementById("addMoneyAmount").value
+        amount: document.getElementById("addMoneyAmount").value * 100
     })
 })
 
@@ -308,9 +311,15 @@ pagamentoDiv.addEventListener("click", ()=>{
 
 payNow.addEventListener("click", ()=>{
     pagamentoDiv.style.display = "block"
+    type = 1
+    let total
+    let i = 0
+    user.cart.forEach(item=>{
+        total+=item.qtd*foods[i].price
+        i++
+    })
     stripeHandler.open({
-        //amount: price
-        amount: 30
+        amount: price*100
     })
 })
 
@@ -341,7 +350,8 @@ var stripeHandler = StripeCheckout.configure({
             body: JSON.stringify({
                 stripeTokenId: token.id,
                 items: items,
-                userid: user.id
+                userid: user.id,
+                type:0
             })
         }).then(function(res) {
             return res.json()
