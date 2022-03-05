@@ -2,6 +2,8 @@
 const socket = io('74.207.230.69')
 var user 
 
+const stripePublicKey = "pk_test_51KZzt1AjuYDFXhq9tiVpve2kGVnQS2vk1aT4cbzeScIvsZXyJ9Hbky3uBnsvI6lgj9ONBJu7XXTId6dlrUZVTodf00y4vIG0DN"
+
 const foods = [{"name": "Filé Mignon", "preco":25, "id":0, "img": "comida.jpg"}, {"name": "Picanha", "preco":30, "id":1, "img": "comida2.png"}]
 
 let trans = document.getElementById("trans")
@@ -53,6 +55,11 @@ let currentMoney = document.getElementById("currentMoney")
 let copySymbol = document.getElementById("copySymbol")
 
 let mode = 1
+
+
+
+
+
 
 function changePage(page){
     if(page==2){
@@ -298,6 +305,9 @@ pagamentoDiv.addEventListener("click", ()=>{
 
 payNow.addEventListener("click", ()=>{
     pagamentoDiv.style.display = "block"
+    stripeHandler.open({
+        amount: price
+    })
 })
 
 useBalance.addEventListener("click", ()=>{
@@ -312,6 +322,30 @@ copySymbol.addEventListener("click", ()=>{
     displayAlert("Código Pix copiado", true)
 })
 
+
+var stripeHandler = StripeCheckout.configure({
+    key: stripePublicKey,
+    locale: 'auto',
+    token: function(token) {
+            items = user.cart
+
+        fetch('/purchase', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                stripeTokenId: token.id,
+                items: items
+            })
+        }).then(function(res) {
+            return res.json()
+        }).catch(function(error) {
+            console.error(error)
+        })
+    }
+})
 
 
 
