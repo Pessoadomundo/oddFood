@@ -347,7 +347,7 @@ var stripeHandler = StripeCheckout.configure({
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
-                "Authorization": "pk_test_51KZzt1AjuYDFXhq9tiVpve2kGVnQS2vk1aT4cbzeScIvsZXyJ9Hbky3uBnsvI6lgj9ONBJu7XXTId6dlrUZVTodf00y4vIG0DN"
+                "Authorization": "Bearer sk_test_51KZzt1AjuYDFXhq9cYSfF5NrHPMVmYjZW5t0EXMVru3GrZoRYa7gei2qncIKPnVv6VdBwHjtDPl65VbvNjHCgJqD00keMe2GPF"
             },
             body: JSON.stringify({
                 stripeTokenId: token.id,
