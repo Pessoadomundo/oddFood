@@ -31,7 +31,7 @@ bodyParser = require("body-parser")
 
 app.use(express.static('./views'))
 app.use(express.static('public'))
-app.use(bodyParser.urlencoded({extended: true}))
+//app.use(bodyParser.urlencoded({extended: true}))
 
 let rawdata = fs.readFileSync('users.json')
 var users = JSON.parse(rawdata)
@@ -109,7 +109,7 @@ app.post('/webhook', express.raw({type: 'application/json'}), (request, response
 
 app.post('/purchase', function(req, res) {
       let total = 0
-      console.log(req.userid)
+      console.log(req.body)
       
       users[req.body.userid].cart.forEach(item=>{
         total+=item.qtd*foods[item.id].preco
