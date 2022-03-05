@@ -315,11 +315,11 @@ payNow.addEventListener("click", ()=>{
     let total
     let i = 0
     user.cart.forEach(item=>{
-        total+=item.qtd*foods[i].price
+        total+=item.qtd*foods[i].preco
         i++
     })
     stripeHandler.open({
-        amount: price*100
+        amount: total*100
     })
 })
 
