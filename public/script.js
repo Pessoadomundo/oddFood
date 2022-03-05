@@ -306,7 +306,8 @@ pagamentoDiv.addEventListener("click", ()=>{
 payNow.addEventListener("click", ()=>{
     pagamentoDiv.style.display = "block"
     stripeHandler.open({
-        amount: price
+        //amount: price
+        amount: 30
     })
 })
 
