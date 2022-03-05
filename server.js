@@ -109,7 +109,8 @@ app.post('/webhook', express.raw({type: 'application/json'}), (request, response
 
 app.post('/purchase', function(req, res) {
       let total = 0
-      users[req.params.userid].cart.forEach(item=>{
+      console.log(req.query.userid)
+      users[req.query.userid].cart.forEach(item=>{
         total+=item.qtd*foods[item.id].preco
       })
 
