@@ -124,7 +124,6 @@ app.post('/purchase', jsonParser, function(req, res) {
         res.json({ message: 'Successfully purchased items' })
       }).catch(function() {
         console.log('Charge Fail')
-        console.log(err)
         res.status(500).end()
       })
 })
