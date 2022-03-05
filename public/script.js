@@ -329,7 +329,6 @@ var stripeHandler = StripeCheckout.configure({
     locale: 'auto',
     token: function(token) {
             items = user.cart
-            console.log(user.id)
         fetch('/purchase', {
             method: 'POST',
             headers: {
@@ -339,7 +338,7 @@ var stripeHandler = StripeCheckout.configure({
             body: JSON.stringify({
                 stripeTokenId: token.id,
                 items: items,
-                userid: user.id
+                userid: "a"
             })
         }).then(function(res) {
             return res.json()
