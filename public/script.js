@@ -329,7 +329,7 @@ var stripeHandler = StripeCheckout.configure({
     locale: 'auto',
     token: function(token) {
             items = user.cart
-
+            console.log(user.id)
         fetch('/purchase', {
             method: 'POST',
             headers: {
