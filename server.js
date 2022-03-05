@@ -108,9 +108,6 @@ app.post('/webhook', express.raw({type: 'application/json'}), (request, response
 })
 
 app.post('/purchase', function(req, res) {
-    if (error) {
-      res.status(500).end()
-    } else {
       let total = 0
       users[req.params.userid].cart.forEach(item=>{
         total+=item.qtd*foods[item.id].preco
@@ -127,7 +124,6 @@ app.post('/purchase', function(req, res) {
         console.log('Charge Fail')
         res.status(500).end()
       })
-    }
 })
 
 server.listen(80)
