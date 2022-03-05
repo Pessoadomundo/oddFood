@@ -111,7 +111,7 @@ app.post('/purchase', jsonParser, function(req, res) {
       let total = 0
       console.log(req.body)
       
-      users[req.body.userid].cart.forEach(item=>{
+      users[getUserIndex(req.body.userid)].cart.forEach(item=>{
         total+=item.qtd*foods[item.id].preco
       })
 
