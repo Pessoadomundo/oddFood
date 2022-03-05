@@ -26,12 +26,12 @@ var app = express();
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
 const stripe = require('stripe')(stripeSecretKey)
-bodyParser = require("body-parser")
+const bodyParser = require("body-parser")
 
 
 app.use(express.static('./views'))
 app.use(express.static('public'))
-//app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.urlencoded({extended: true}))
 
 let rawdata = fs.readFileSync('users.json')
 var users = JSON.parse(rawdata)
