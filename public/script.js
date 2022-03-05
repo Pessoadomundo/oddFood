@@ -297,6 +297,9 @@ perfil.addEventListener("click", ()=>{
 
 addMoney.addEventListener("click", ()=>{
     pagamentoDiv.style.display = "block"
+    stripeHandler.open({
+        amount: document.getElementById("addMoneyAmount").value
+    })
 })
 
 pagamentoDiv.addEventListener("click", ()=>{
