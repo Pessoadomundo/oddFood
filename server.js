@@ -116,7 +116,7 @@ app.post('/purchase', jsonParser, function(req, res) {
       })
 
       stripe.charges.create({
-        amount: total,
+        amount: total*100,
         source: req.body.stripeTokenId,
         currency: 'brl'
       }).then(function() {
