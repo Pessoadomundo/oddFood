@@ -115,6 +115,10 @@ app.post('/purchase', jsonParser, function(req, res) {
         total+=item.qtd*foods[item.id].preco
       })
 
+      if(req.body.type==2){
+        total = req.body.toAdd
+      }
+
       stripe.charges.create({
         amount: total*100,
         source: req.body.stripeTokenId,
@@ -122,7 +126,8 @@ app.post('/purchase', jsonParser, function(req, res) {
       }).then(function() {
         console.log('Charge Successful')
         res.json({ message: 'Successfully purchased items' })
-      }).catch(function() {
+      }).catch(function(error) {
+        console.log(error)
         console.log('Charge Fail')
         res.status(500).end()
       })

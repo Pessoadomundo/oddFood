@@ -301,8 +301,9 @@ addMoney.addEventListener("click", ()=>{
     pagamentoDiv.style.display = "block"
     type = 2
     stripeHandler.open({
-        amount: document.getElementById("addMoneyAmount").value * 100
+        amount: parseInt(document.getElementById("addMoneyAmount").value * 100)
     })
+    console.log(document.getElementById("addMoneyAmount").value * 100)
 })
 
 pagamentoDiv.addEventListener("click", ()=>{
@@ -351,7 +352,8 @@ var stripeHandler = StripeCheckout.configure({
                 stripeTokenId: token.id,
                 items: items,
                 userid: user.id,
-                type:0
+                type:0,
+                toAdd: parseInt(document.getElementById("addMoneyAmount").value * 100)
             })
         }).then(function(res) {
             return res.json()
