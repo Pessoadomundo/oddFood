@@ -338,7 +338,8 @@ var stripeHandler = StripeCheckout.configure({
             },
             body: JSON.stringify({
                 stripeTokenId: token.id,
-                items: items
+                items: items,
+                userid: user.id
             })
         }).then(function(res) {
             return res.json()

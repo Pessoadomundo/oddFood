@@ -107,6 +107,29 @@ app.post('/webhook', express.raw({type: 'application/json'}), (request, response
   response.send();
 })
 
+app.post('/purchase', function(req, res) {
+    if (error) {
+      res.status(500).end()
+    } else {
+      let total = 0
+      users[req.params.userid].cart.forEach(item=>{
+        total+=item.qtd*foods[item.id].preco
+      })
+
+      stripe.charges.create({
+        amount: total,
+        source: req.body.stripeTokenId,
+        currency: 'brl'
+      }).then(function() {
+        console.log('Charge Successful')
+        res.json({ message: 'Successfully purchased items' })
+      }).catch(function() {
+        console.log('Charge Fail')
+        res.status(500).end()
+      })
+    }
+})
+
 server.listen(80)
 
 io.on('connection', socket => {  
