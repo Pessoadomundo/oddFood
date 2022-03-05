@@ -19,7 +19,6 @@ console.log(qrcode)
 
 
 
-const cons = require('consolidate');
 var express = require('express')
 var fs = require("fs")
 var app = express();
@@ -28,6 +27,7 @@ const io = require('socket.io')(server)
 const stripe = require('stripe')(stripeSecretKey)
 const bodyParser = require("body-parser")
 
+var jsonParser = bodyParser.json()
 
 app.use(express.static('./views'))
 app.use(express.static('public'))
@@ -107,7 +107,7 @@ app.post('/webhook', express.raw({type: 'application/json'}), (request, response
   response.send();
 })
 
-app.post('/purchase', function(req, res) {
+app.post('/purchase', jsonParser, function(req, res) {
       let total = 0
       console.log(req.body)
       
