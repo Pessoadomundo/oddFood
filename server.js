@@ -16,7 +16,7 @@ const qrcode = _pix.Pix("+5531988088186", "Gabriel Jota Lizardo", "Belo Horizont
 console.log(code)
 console.log(qrcode)
 
-
+const stripe = Stripe('sk_test_51KZzt1AjuYDFXhq9cYSfF5NrHPMVmYjZW5t0EXMVru3GrZoRYa7gei2qncIKPnVv6VdBwHjtDPl65VbvNjHCgJqD00keMe2GPF')
 
 
 var express = require('express')
