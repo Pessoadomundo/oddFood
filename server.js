@@ -83,10 +83,10 @@ io.on('connection', socket => {
       io.to(id).emit("loginState", {state: "Fail"})
     }
   })
-  socket.on('registrar', (email, senha) => {
+  socket.on('registrar', (email, senha, chavePix) => {
     let found = false
     users.forEach(user => {
-      if(user.email==email){
+      if(user.email==email || user.chavePix == chavePix){
           found = true
       }
     })
@@ -94,7 +94,7 @@ io.on('connection', socket => {
       io.to(id).emit("regState", {state: "Fail"})
     }else{
       io.to(id).emit("regState", {state: "Success"})
-      users.push({"email": email, "senha":senha, "id":users.length+1, "saldo":0, "cart":[], "pending":[]})
+      users.push({"email": email, "senha":senha, "chavePix": chavePix, "id":users.length+1, "saldo":0, "cart":[], "pending":[]})
       fs.writeFile('users.json', JSON.stringify(users), (err) => {})
     }
   })

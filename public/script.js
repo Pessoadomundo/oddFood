@@ -14,6 +14,7 @@ let tela3 = document.getElementById("tela3")
 
 let loginTitle = document.getElementById("loginTitle")
 let email = document.getElementById("email")
+let chavePixIn = document.getElementById("chavePixIn")
 let senha = document.getElementById("senha")
 let login = document.getElementById("enviar")
 let registrar = document.getElementById("registrar")
@@ -248,7 +249,7 @@ login.addEventListener("click", ()=>{
     if(mode==1){
         socket.emit("login", email.value, senha.value)
     }else if(mode==2){
-        socket.emit("registrar", email.value, senha.value)
+        socket.emit("registrar", email.value, senha.value, chavePixIn.value)
     }
 })
 
@@ -353,8 +354,9 @@ socket.on("regState", data=>{
         result.innerText = "Usuário criado com sucesso"
         email.value = ""
         senha.value = ""
+        chavePixIn.value = ""
     }else if(data.state == "Fail"){
-        result.innerText = "Usuário já existente"
+        result.innerText = "Nome ou chave pix já usados"
     }
 })
 
