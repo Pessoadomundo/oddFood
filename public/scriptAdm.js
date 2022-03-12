@@ -1,5 +1,3 @@
-const res = require("express/lib/response")
-
 const socket = io('74.207.230.69')
 
 document.getElementById("search").addEventListener("click", ()=>{

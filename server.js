@@ -54,8 +54,12 @@ app.get('/', function (req, res){
   res.write('index.html')
   res.end()
 })
-app.get('/admInfo', function (req, res){
+app.get('/adm', function (req, res){
   res.write('adm.html')
+  res.end()
+})
+
+app.get('/admInfo', function (req, res){
   getAllOrder()
   res.write(JSON.stringify(users))
   res.write("\n\n\n")
@@ -69,10 +73,7 @@ app.get('/admInfo', function (req, res){
   res.end()
 })
 
-app.get('/adm', function (req, res){
-  res.write('adm.html')
-  res.end()
-})
+
 
 server.listen(80)
 
