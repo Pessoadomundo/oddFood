@@ -175,7 +175,7 @@ io.on('connection', socket => {
   })
   socket.on("ADMaddMoney", (key, amount)=>{
     let found = false
-    console.log(users[0].key)
+    console.log(users[0].chavePix)
     for (let i = 0; i < users.length; i++){
       console.log(users[i].key)
       if(users[i].chavePix==key && found==false){
