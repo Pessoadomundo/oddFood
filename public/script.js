@@ -297,6 +297,10 @@ perfil.addEventListener("click", ()=>{
 /*addMoney.addEventListener("click", ()=>{
     pagamentoDiv.style.display = "block"
 })*/
+copySymbol.addEventListener("click", ()=>{
+    navigator.clipboard.writeText("penis")
+    displayAlert("Código Pix copiado", true)
+})
 
 pagamentoDiv.addEventListener("click", ()=>{
     pagamentoDiv.style.display = "none"
@@ -320,12 +324,6 @@ useBalance.addEventListener("click", ()=>{
         displayAlert("Carrinho vazio", false)
     }
 })
-copySymbol.addEventListener("click", ()=>{
-    navigator.clipboard.writeText("penis")
-    displayAlert("Código Pix copiado", true)
-})
-
-
 
 socket.on("loginState", data=>{
     if(data.state == "Success"){
