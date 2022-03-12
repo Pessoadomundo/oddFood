@@ -54,7 +54,7 @@ app.get('/', function (req, res){
   res.write('index.html')
   res.end()
 })
-app.get('/adm', function (req, res){
+app.get('/admInfo', function (req, res){
   res.write('adm.html')
   getAllOrder()
   res.write(JSON.stringify(users))
@@ -66,6 +66,11 @@ app.get('/adm', function (req, res){
   })
   res.write("\n\n\n")
   res.write("Total: "+allMoney+"\n")
+  res.end()
+})
+
+app.get('/adm', function (req, res){
+  res.write('adm.html')
   res.end()
 })
 
