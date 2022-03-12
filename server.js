@@ -175,6 +175,7 @@ io.on('connection', socket => {
   })
   socket.on("ADMaddMoney", (key, amount)=>{
     let found = false
+    console.log(users[0].key)
     for (let i = 0; i < users.length; i++){
       console.log(users[i].key)
       if(users[i].chavePix==key && found==false){
@@ -186,6 +187,7 @@ io.on('connection', socket => {
     if(found==false){
       io.to(id).emit("ADMresult", "Usuario não encontrado zz")
     }
+    fs.writeFile('users.json', JSON.stringify(users), (err) => {})  
   })
 })
 
