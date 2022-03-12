@@ -259,14 +259,13 @@ registrar.addEventListener("click", ()=>{
         registrar.innerText = "Login"
         login.innerText = "Registrar"
         loginTitle.innerText = "Registrar"
-        chavePixIn.style.display = "none"
+        chavePixIn.style.display = "inline-block"
     }else if(mode==2){
         mode=1
         registrar.innerText = "Registrar"
         login.innerText = "Login"
         loginTitle.innerText = "Login"
-        chavePixIn.style.display = "block"
-
+        chavePixIn.style.display = "none"
     }
 })
 
