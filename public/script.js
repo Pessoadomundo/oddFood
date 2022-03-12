@@ -303,7 +303,9 @@ copySymbol.addEventListener("click", ()=>{
 })
 
 pagamentoDiv.addEventListener("click", ()=>{
-    pagamentoDiv.style.display = "none"
+    setTimeout(()=>{
+        pagamentoDiv.style.display = "none"
+    }, 100)
 })
 
 /*payNow.addEventListener("click", ()=>{
