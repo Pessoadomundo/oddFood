@@ -1,1 +1,1 @@
-[{"email":"aa","id":"0123","senha":"bb","saldo":4445,"cart":[],"pending":[]}]
+[{"email":"aa","id":"0123","senha":"bb", "chavePix": "aaa", "saldo":4445,"cart":[],"pending":[]}]

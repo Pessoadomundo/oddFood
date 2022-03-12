@@ -1,9 +1,6 @@
 ///////////////////////////////////////////////////////////////
 const socket = io('74.207.230.69')
 var user 
-
-var type = 0
-
 const foods = [{"name": "Filé Mignon", "preco":25, "id":0, "img": "comida.jpg"}, {"name": "Picanha", "preco":30, "id":1, "img": "comida2.png"}]
 
 let trans = document.getElementById("trans")
@@ -270,7 +267,7 @@ registrar.addEventListener("click", ()=>{
 })
 
 plus.addEventListener("click", ()=>{
-    changePage(3)
+    pagamentoDiv.style.display = "block"
 })
 backFromAdd.addEventListener("click", ()=>{
     changePage(2)
@@ -297,17 +294,15 @@ perfil.addEventListener("click", ()=>{
     perfil.style.borderTop = "white 5px solid"
 })
 
-addMoney.addEventListener("click", ()=>{
+/*addMoney.addEventListener("click", ()=>{
     pagamentoDiv.style.display = "block"
-    type = 2
-    console.log(document.getElementById("addMoneyAmount").value * 100)
-})
+})*/
 
 pagamentoDiv.addEventListener("click", ()=>{
     pagamentoDiv.style.display = "none"
 })
 
-payNow.addEventListener("click", ()=>{
+/*payNow.addEventListener("click", ()=>{
     pagamentoDiv.style.display = "block"
     type = 1
     let total
@@ -317,7 +312,7 @@ payNow.addEventListener("click", ()=>{
         i++
     })
 })
-
+*/
 useBalance.addEventListener("click", ()=>{
     if(user.cart.length>0){
         socket.emit("balancePayAsk", user.id)
