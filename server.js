@@ -167,10 +167,12 @@ io.on('connection', socket => {
 async function a(){
   setInterval(()=>{
     if((new Date).getHours()==13){
-      users.forEach(user=>{
-        user.cart = []
-        user.pending = []
-      })
+      if([2,3,4,5,6].includes((new Date).getDay)){
+        users.forEach(user=>{
+          user.cart = []
+          user.pending = []
+        })
+      }
     }
   },6000000)
 }
