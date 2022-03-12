@@ -13,7 +13,8 @@ var fs = require("fs")
 var app = express();
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
-const bodyParser = require("body-parser")
+const bodyParser = require("body-parser");
+const { json } = require('express/lib/response');
 
 app.use(express.static('./views'))
 app.use(express.static('public'))
@@ -44,6 +45,7 @@ function getAllOrder(){
     user.pending.forEach(item=>{
       orders[item.id].qtd += item.qtd
       allMoney += item.qtd*foods[item.id].preco
+      //allMoney += item.qtd*(foods[item.id].preco+5)
     })
   })
 }
@@ -55,6 +57,8 @@ app.get('/', function (req, res){
 app.get('/adm', function (req, res){
   res.write('adm.html')
   getAllOrder()
+  res.write(JSON.stringify(users))
+  res.write("\n\n\n")
   res.write(JSON.stringify(orders))
   res.write("\n\n\n")
   orders.forEach(order=>{
@@ -161,6 +165,19 @@ io.on('connection', socket => {
       fs.writeFile('users.json', JSON.stringify(users), (err) => {})  
     }else{
       io.to(id).emit("balancePayResp", false, users[index].saldo)
+    }
+  })
+  socket.on("ADMaddMoney", (key, amount)=>{
+    let found = false
+    for (let i = 0; i < users.length; i++){
+      if(users[i].chavePix==key && found==false){
+        found = true
+        users[i].saldo+=amount
+        io.to(id).emit("ADMresult", "Deu certo zz")
+      }
+    }
+    if(found==false){
+      io.to(id).emit("ADMresult", "Usuario não encontrado zz")
     }
   })
 })
