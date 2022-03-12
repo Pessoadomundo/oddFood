@@ -1,11 +1,3 @@
-if(process.env.NODE_ENV !== "production"){
-  require("dotenv").config()
-}
-
-const stripeSecretKey = process.env.STRIPE_SECRET_KEY
-const stripePublicKey = process.env.STRIPE_PUBLIC_KEY
-
-
 const _pix = require('faz-um-pix');
 
 const code = _pix.Pix("+5531988088186", "Gabriel Jota Lizardo", "Belo Horizonte", "10", "Penis");
@@ -21,10 +13,7 @@ var fs = require("fs")
 var app = express();
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
-const stripe = require('stripe')(stripeSecretKey)
 const bodyParser = require("body-parser")
-
-var jsonParser = bodyParser.json()
 
 app.use(express.static('./views'))
 app.use(express.static('public'))
@@ -73,61 +62,6 @@ app.get('/adm', function (req, res){
   res.write("\n\n\n")
   res.write("Total: "+allMoney+"\n")
   res.end()
-})
-app.get('/pagamento', function (req, res){
-  
-})
-
-const endpointSecret = "whsec_9fb5d7e9f4e4ef10f5e4c3cfd72444d02ad410dd875726112c9da97f6db2d9fe";
-
-app.post('/webhook', express.raw({type: 'application/json'}), (request, response) => {
-  const sig = request.headers['stripe-signature'];
-  console.log("a")
-
-  let event;
-
-  try {
-    event = stripe.webhooks.constructEvent(request.body, sig, endpointSecret);
-  } catch (err) {
-    response.status(400).send(`Webhook Error: ${err.message}`);
-    return;
-  }
-
-  switch (event.type) {
-    case 'payment_intent.succeeded':
-      const paymentIntent = event.data.object;
-      break;
-    default:
-      console.log(`Unhandled event type ${event.type}`);
-  }
-
-  response.send();
-})
-
-app.post('/purchase', jsonParser, function(req, res) {
-      let total = 0
-      console.log(req.body)
-      
-      users[getUserIndex(req.body.userid)].cart.forEach(item=>{
-        total+=item.qtd*foods[item.id].preco
-      })
-
-      if(req.body.type==2){
-        total = req.body.toAdd
-      }
-
-      stripe.charges.create({
-        amount: total*100,
-        source: req.body.stripeTokenId,
-        currency: 'brl'
-      }).then(function() {
-        console.log('Charge Successful')
-        res.json({ message: 'Successfully purchased items' })
-      }).catch(function(error) {
-        console.log(error)
-        console.log('Charge Fail')
-        res.status(500).end()
-      })
 })
 
 server.listen(80)

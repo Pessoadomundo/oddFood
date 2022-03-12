@@ -12,7 +12,6 @@
     <link rel="shortcut icon" href="icon.png">
     <!------------------------------------------------------------------------------------------>
     <script defer src="/socket.io/socket.io.js"></script>
-    <script src="https://checkout.stripe.com/checkout.js" defer></script>
 
     <script defer src="script.js"></script>
 </head>
@@ -26,7 +25,8 @@
             <div id="login">
                 <form>
                     <h1 id="loginTitle"><b>Login</b></h1>
-                    <input type="email" id="email" placeholder="Email"><br>
+                    <input type="text" id="email" placeholder="Nome completo"><br>
+                    <input type="text" id="chavePixIn" placeholder="Chave Pix usada nos pagamentos"><br>
                     <input type="password" id="senha" placeholder="Senha"><br>
                     <button id="enviar" type="button">Login</button>
                     <h4 id="result"></h4>
@@ -44,7 +44,7 @@
     <div id="tela2">
         <div id="daBarra2">
             <div id="barra2">
-                <span id="saldo">Saldo: R$800,00</span>
+                <span id="saldo">Saldo: R$0,00</span>
                 <img id="plus" src="plus.png">
             </div>
         </div>
@@ -59,7 +59,7 @@
                 <div id="itensCarrinho">
 
                 </div>
-                <h1 id="totalValue">Total: R$80,00</h1>
+                <h1 id="totalValue">Total: R$0,00</h1>
                 <div id="paymentOptions">
                     <span id="payNow" class="paymentOption">Pagar agora</span>
                     <span id="useBalance" class="paymentOption">Usar saldo</span>

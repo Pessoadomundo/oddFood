@@ -4,8 +4,6 @@ var user
 
 var type = 0
 
-const stripePublicKey = "pk_test_51KZzt1AjuYDFXhq9tiVpve2kGVnQS2vk1aT4cbzeScIvsZXyJ9Hbky3uBnsvI6lgj9ONBJu7XXTId6dlrUZVTodf00y4vIG0DN"
-
 const foods = [{"name": "Filé Mignon", "preco":25, "id":0, "img": "comida.jpg"}, {"name": "Picanha", "preco":30, "id":1, "img": "comida2.png"}]
 
 let trans = document.getElementById("trans")
@@ -300,9 +298,6 @@ perfil.addEventListener("click", ()=>{
 addMoney.addEventListener("click", ()=>{
     pagamentoDiv.style.display = "block"
     type = 2
-    stripeHandler.open({
-        amount: parseInt(document.getElementById("addMoneyAmount").value * 100)
-    })
     console.log(document.getElementById("addMoneyAmount").value * 100)
 })
 
@@ -319,9 +314,6 @@ payNow.addEventListener("click", ()=>{
         total+=item.qtd*foods[i].preco
         i++
     })
-    stripeHandler.open({
-        amount: total*100
-    })
 })
 
 useBalance.addEventListener("click", ()=>{
@@ -334,33 +326,6 @@ useBalance.addEventListener("click", ()=>{
 copySymbol.addEventListener("click", ()=>{
     navigator.clipboard.writeText("penis")
     displayAlert("Código Pix copiado", true)
-})
-
-
-var stripeHandler = StripeCheckout.configure({
-    key: stripePublicKey,
-    locale: 'auto',
-    token: function(token) {
-            items = user.cart
-        fetch('/purchase', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-            },
-            body: JSON.stringify({
-                stripeTokenId: token.id,
-                items: items,
-                userid: user.id,
-                type:0,
-                toAdd: parseInt(document.getElementById("addMoneyAmount").value * 100)
-            })
-        }).then(function(res) {
-            return res.json()
-        }).catch(function(error) {
-            console.error(error)
-        })
-    }
 })
 
 
