@@ -298,14 +298,12 @@ perfil.addEventListener("click", ()=>{
     pagamentoDiv.style.display = "block"
 })*/
 copySymbol.addEventListener("click", ()=>{
-    navigator.clipboard.writeText("penis")
+    navigator.clipboard.writeText("95fab329-6729-4873-ab05-9866ca677a0a")
     displayAlert("Código Pix copiado", true)
 })
 
 pagamentoDiv.addEventListener("click", ()=>{
-    setTimeout(()=>{
-        pagamentoDiv.style.display = "none"
-    }, 100)
+    pagamentoDiv.style.display = "none"
 })
 
 /*payNow.addEventListener("click", ()=>{

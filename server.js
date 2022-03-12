@@ -53,6 +53,7 @@ app.get('/', function (req, res){
   res.end()
 })
 app.get('/adm', function (req, res){
+  res.write('adm.html')
   getAllOrder()
   res.write(JSON.stringify(orders))
   res.write("\n\n\n")
