@@ -1,4 +1,4 @@
-const _pix = require('faz-um-pix');
+/*const _pix = require('faz-um-pix');
 
 const code = _pix.Pix("+5531988088186", "Gabriel Jota Lizardo", "Belo Horizonte", "10", "Penis");
 
@@ -7,7 +7,7 @@ const qrcode = _pix.Pix("+5531988088186", "Gabriel Jota Lizardo", "Belo Horizont
 
 console.log(code)
 console.log(qrcode)
-
+*/
 var express = require('express')
 var fs = require("fs")
 var app = express();
