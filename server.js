@@ -180,7 +180,7 @@ io.on('connection', socket => {
       console.log(users[i].chavePix==key)
       if(users[i].chavePix==key && found==false){
         found = true
-        users[i].saldo+=amount
+        users[i].saldo+=parseInt(amount)
         io.to(id).emit("ADMresult", "Deu certo zz")
       }
     }
