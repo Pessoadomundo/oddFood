@@ -145,7 +145,7 @@ function displayFood(id, type, elt, qtd=0){
     
     let eltImgComida = document.createElement("img")
     eltImgComida.classList.add("imgComida")
-    eltImgComida.src = food.img
+    eltImgComida.src = "./pratos/"+food.img
     eltDivImgComida.appendChild(eltImgComida)
     eltComida.appendChild(eltDivImgComida)
 
