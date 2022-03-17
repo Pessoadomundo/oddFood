@@ -54,6 +54,7 @@ function getNamedOrders(){
   users.forEach(user => {
     let comidas = ""
     user.pending.forEach(food=>{
+      console.log(food)
       comidas+=food.name+", "
     })
     text+=user.email+" - "+comidas+"\n"
