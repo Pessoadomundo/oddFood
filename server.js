@@ -49,6 +49,17 @@ function getAllOrder(){
     })
   })
 }
+function getNamedOrders(){
+  let text = ""
+  users.forEach(user => {
+    let comidas = ""
+    user.pending.forEach(food=>{
+      comidas+=food.nome+", "
+    })
+    text+=user.email+" - "+comidas+"\n"
+  })
+  return text
+}
 
 app.get('/', function (req, res){
   res.write('index.html')
@@ -70,6 +81,8 @@ app.get('/admInfo', function (req, res){
   })
   res.write("\n\n\n")
   res.write("Total: "+allMoney+"\n")
+  res.write("\n\n\n")
+  res.write(getNamedOrders())
   res.end()
 })
 
@@ -188,6 +201,11 @@ io.on('connection', socket => {
       io.to(id).emit("ADMresult", "Usuario não encontrado zz")
     }
     fs.writeFile('users.json', JSON.stringify(users), (err) => {})  
+  })
+  socket.on("eraseOrders", a=>{
+    for (let i = 0; i < users.length; i++) {
+      users.pending = []
+    }
   })
 })
 
