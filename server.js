@@ -52,12 +52,14 @@ function getAllOrder(){
 function getNamedOrders(){
   let text = ""
   users.forEach(user => {
+    if(user.pending!=[]){
     let comidas = ""
     user.pending.forEach(food=>{
       console.log(food)
-      comidas+=foods[food.id].name+" x"+food.qtd+", "
+      comidas+=foods[food.id].name+"x"+food.qtd+", "
     })
     text+=user.email+" - "+comidas+"\n"
+  }
   })
   return text
 }
@@ -205,7 +207,7 @@ io.on('connection', socket => {
   })
   socket.on("eraseOrders", a=>{
     for (let i = 0; i < users.length; i++) {
-      users.pending = []
+      users[i].pending = []
     }
   })
 })
