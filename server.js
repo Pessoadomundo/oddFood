@@ -93,7 +93,7 @@ app.get('/admInfo', function (req, res){
   res.write("\n\n\n")
   res.write("Total: "+allMoney+"\n")
   res.write("\n\n\n")
-  res.write("Peidos com Nome: \n")
+  res.write("Pedidos com Nome: \n")
   res.write(getNamedOrders())
   res.write("\n\n\n")
   res.write("Chaves Pix \n")
