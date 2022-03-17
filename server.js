@@ -64,6 +64,14 @@ function getNamedOrders(){
   return text
 }
 
+function getPixKeys(){
+  let text = ""
+  users.forEach(user => {
+    text+=user.email+" - "+user.chavePix+"\n"
+  })
+  return text
+}
+
 app.get('/', function (req, res){
   res.write('index.html')
   res.end()
@@ -77,8 +85,6 @@ app.get('/admInfo', function (req, res){
   getAllOrder()
   res.write(JSON.stringify(users))
   res.write("\n\n\n")
-  res.write(JSON.stringify(orders))
-  res.write("\n\n\n")
   orders.forEach(order=>{
     res.write(order.nome+": "+order.qtd+"\n")
   })
@@ -86,6 +92,8 @@ app.get('/admInfo', function (req, res){
   res.write("Total: "+allMoney+"\n")
   res.write("\n\n\n")
   res.write(getNamedOrders())
+  res.write("\n\n\n")
+  res.write(getPixKeys())
   res.end()
 })
 
@@ -212,6 +220,7 @@ io.on('connection', socket => {
   })
 })
 
+/*
 async function a(){
   setInterval(()=>{
     if((new Date).getHours()==13){
@@ -225,3 +234,5 @@ async function a(){
   },6000000)
 }
 a()
+
+*/
