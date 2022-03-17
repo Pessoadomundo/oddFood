@@ -83,16 +83,20 @@ app.get('/adm', function (req, res){
 
 app.get('/admInfo', function (req, res){
   getAllOrder()
+  res.write("Usuários \n")
   res.write(JSON.stringify(users))
   res.write("\n\n\n")
+  res.write("Pedidos \n")
   orders.forEach(order=>{
     res.write(order.nome+": "+order.qtd+"\n")
   })
   res.write("\n\n\n")
   res.write("Total: "+allMoney+"\n")
   res.write("\n\n\n")
+  res.write("Peidos com Nome: \n")
   res.write(getNamedOrders())
   res.write("\n\n\n")
+  res.write("Chaves Pix \n")
   res.write(getPixKeys())
   res.end()
 })
