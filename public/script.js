@@ -202,6 +202,7 @@ function displayFood(id, type, elt, qtd=0){
         eltPlusSign.classList.add("plusSign")
         eltPlusSign.addEventListener("click", ()=>{addToCart(id, 1)})
         eltDivInfoComida.appendChild(eltPlusSign)
+        eltDivInfoComida.style.marginTop = "0px"
     }else if(type==3){
         eltDivInfoComida.appendChild(document.createElement("br"))
         let amount = document.createElement("p")
