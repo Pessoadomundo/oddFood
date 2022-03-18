@@ -1,3 +1,5 @@
+const { timeout } = require("nodemon/lib/config")
+
 ///////////////////////////////////////////////////////////////
 const socket = io('http://oddfood.ddns.net/')
 var user 
@@ -299,12 +301,14 @@ perfil.addEventListener("click", ()=>{
     pagamentoDiv.style.display = "block"
 })*/
 copySymbol.addEventListener("click", ()=>{
-    navigator.clipboard.writeText("95fab329-6729-4873-ab05-9866ca677a0a")
+    navigator.clipboard.writeText("c802a08e-def8-4202-b6c1-72f137327329")
     displayAlert("Código Pix copiado", true)
 })
 
 pagamentoDiv.addEventListener("click", ()=>{
-    pagamentoDiv.style.display = "none"
+    setTimeout(()=>{
+        pagamentoDiv.style.display = "none"
+    }, 50)
 })
 
 /*payNow.addEventListener("click", ()=>{
