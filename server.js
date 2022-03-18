@@ -98,7 +98,7 @@ app.get('/admInfo', function (req, res){
   res.write("\n\n\n")
   res.write("Total de ganhos: "+allMoney+"\n")
   res.write("\n")
-  res.write("Total a pagar: "+allMoney+"\n")
+  res.write("Total a pagar: "+moneyToPay+"\n")
   res.write("\n\n\n")
   res.write("Pedidos com Nome: \n")
   res.write(getNamedOrders())
