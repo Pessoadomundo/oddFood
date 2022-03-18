@@ -298,9 +298,9 @@ perfil.addEventListener("click", ()=>{
     pagamentoDiv.style.display = "block"
 })*/
 copySymbol.addEventListener("click", ()=>{
+    alert("a")
     navigator.clipboard.writeText("c802a08e-def8-4202-b6c1-72f137327329")
     displayAlert("Código Pix copiado", true)
-    alert("a")
 })
 
 pagamentoDiv.addEventListener("click", ()=>{
