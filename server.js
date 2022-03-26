@@ -48,7 +48,7 @@ function getAllOrder(){
       allMoney += item.qtd*foods[item.id].preco
       if(item.id<=26){
         moneyToPay += item.qtd*(foods[item.id].preco-5)
-      }else if(item.id==27 || item.id==28){
+      }else if(item.id==27 || item.id==28 || item.id>=35){
         moneyToPay += item.qtd*(foods[item.id].preco-1)
       }
       else{
