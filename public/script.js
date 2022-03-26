@@ -378,3 +378,10 @@ socket.on("balancePayResp", (state, saldo)=>{
     },500)
 })
 
+async function a(){
+    setInterval(()=>{
+        socket.emit("askUser", user.id)
+        displayBalance()
+    },10000)
+  }
+  a()
