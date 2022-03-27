@@ -93,9 +93,7 @@
 
     <div id="tela3">
         <div id="tutorialDiv">
-            <span id="backTutorial">←</span>
-            <h3 id="tutorialText">Passo 1: Criar a conta</h3>
-            <span id="forwardTutorial">→</span>
+            <h3 id="tutorialText"><span id="backTutorial">←</span>Passo 1: Criar a conta<span id="forwardTutorial">→</span></h3>
             <img id="tutorialGif" src="tela.png">           
         </div>
     </div>
@@ -474,19 +472,19 @@
         }
         #tutorialText{
             color: white;
+            display: inline-block;
+            margin-top: 200px;
         }
         #backTutorial{
             background-color: white;
             border: 10px solid white;
             border-radius: 10px;
-            margin-top: 110px;
         }
         #forwardTutorial{
             background-color: white;
             border: 10px solid white;
             border-radius: 10px;
             margin-bottom: 30px;
-            float: right;
         }
         @keyframes tela13{
             from {opacity: 100%;border-bottom: black solid 0px;}
