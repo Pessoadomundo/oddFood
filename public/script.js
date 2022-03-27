@@ -164,7 +164,7 @@ function updateTut(tut){
         sauce.src = tuTelas[tut].imagem
         setTimeout(()=>{
             window.scroll(0, 100);
-        }, 1000)
+        }, 2000)
     }
 }
 function displayFood(id, type, elt, qtd=0){
