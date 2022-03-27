@@ -60,7 +60,7 @@ let mode = 1
 
 let tuTela = 0
 
-let tuTelas = [{"texto": "Passo 1: Criar a conta", "imagem": "tela1.mov"}, {"texto": "Passo 2: Fazer Login", "imagem": "tela2.mov"}, {"texto": "Passo 3: Adicionar Saldo", "imagem": "tela3.mov"}, {"texto": "Passo 4: Fazer Pedido", "imagem": "tela4.mov"}, {"texto": "", "imagem": "tela5.mov"}]
+let tuTelas = [{"texto": "Passo 1: Criar a conta", "imagem": "tela1.mov"}, {"texto": "Passo 2: Fazer Login", "imagem": "tela2.mov"}, {"texto": "Passo 3: Adicionar Saldo", "imagem": "tela3.mov"}, {"texto": "Passo 4: Fazer Pedido", "imagem": "tela4.mov"}, {"texto": "Fim", "imagem": "tela5.mov"}]
 
 
 function changePage(page){
@@ -161,6 +161,7 @@ function updateTut(tut){
         tutorialGif.play()
         tuText.innerHTML = tuTelas[tut].texto
         sauce.src = tuTelas[tut].imagem
+        window.scroll(0, 100);
     }
 }
 
