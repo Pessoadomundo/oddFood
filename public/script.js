@@ -68,7 +68,7 @@ function changePage(page){
     if(page==3){
         tela1.style.display = "none"
         tela2.style.display = "none"
-        tela3.style.display = "block"
+        tela3.style.display = "flex"
     }
 }
 
