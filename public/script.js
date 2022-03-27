@@ -271,9 +271,6 @@ registrar.addEventListener("click", ()=>{
 plus.addEventListener("click", ()=>{
     pagamentoDiv.style.display = "block"
 })
-backFromAdd.addEventListener("click", ()=>{
-    changePage(2)
-})
 
 bag.addEventListener("click", ()=>{
     changeMenu(1)
