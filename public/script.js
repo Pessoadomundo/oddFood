@@ -58,7 +58,7 @@ let mode = 1
 
 let tuTela = 0
 
-let tuTelas = [{"texto": "Passo 1: Criar a conta", "imagem": "tela.png"}, {"texto": "Passo 2: Fazer Login", "imagem": "carrinho.png"}]
+let tuTelas = [{"texto": "Passo 1: Criar a conta", "imagem": "tela.png"}, {"texto": "Passo 2: Fazer Login", "imagem": "tela.png"}]
 
 
 function changePage(page){
