@@ -321,15 +321,15 @@ perfil.addEventListener("click", ()=>{
 
 copySymbol.addEventListener("click", ()=>{
     alert("a")
-    navigator.clipboard.writeText("c802a08e-def8-4202-b6c1-72f137327329")
-    displayAlert("Código Pix copiado", true)
+    //navigator.clipboard.writeText("c802a08e-def8-4202-b6c1-72f137327329")
+    //displayAlert("Código Pix copiado", true)
 })
 
 pagamentoDiv.addEventListener("click", ()=>{
-    /*setTimeout(()=>{
+    setTimeout(()=>{
         pagamentoDiv.style.display = "none"
     }, 50)
-    */
+    
 })
 
 tutorial.addEventListener("click", ()=>{
