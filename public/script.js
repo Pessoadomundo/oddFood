@@ -17,6 +17,8 @@ let registrar = document.getElementById("registrar")
 let result = document.getElementById("result")
 let tutorial = document.getElementById("tutorial")
 
+tutorial.innerHTML("penis")
+
 let container1 = document.getElementById("container")
 let container2 = document.getElementById("container2")
 let container3 = document.getElementById("container3")
