@@ -157,6 +157,8 @@ function updateTut(tut){
     }else if(tut==25){
 
     }else{
+        tutorialGif.load()
+        tutorialGif.play()
         tuText.innerHTML = tuTelas[tut].texto
         sauce.src = tuTelas[tut].imagem
     }
