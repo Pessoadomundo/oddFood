@@ -310,7 +310,6 @@ pagamentoDiv.addEventListener("click", ()=>{
 })
 
 tutorial.addEventListener("click", ()=>{
-    alert("a")
     changePage(3)
 })
 
