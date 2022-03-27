@@ -64,11 +64,11 @@ function changePage(page){
     }
     if(page==3){
         tela1.style.animation = "tela13 1s"
-        tela3.style.display = "flex"
-        tela3.style.animation = "tela132 2s"
         setTimeout(()=>{
             tela1.style.display = "none"
             tela2.style.display = "none"
+            tela3.style.display = "flex"
+            tela3.style.animation = "tela132 2s"
         },1000)
     }
 }
