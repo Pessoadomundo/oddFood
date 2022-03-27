@@ -310,6 +310,10 @@ pagamentoDiv.addEventListener("click", ()=>{
     */
 })
 
+tutorial.addEventListener("click", ()=>{
+    changePage(3)
+})
+
 /*payNow.addEventListener("click", ()=>{
     pagamentoDiv.style.display = "block"
     type = 1
