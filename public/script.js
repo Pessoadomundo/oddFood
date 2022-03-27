@@ -52,6 +52,7 @@ let tutorialGif = document.getElementById("tutorialGif")
 let tutorialText = document.getElementById("tutorialText")
 let backTutorial = document.getElementById("backTutorial")
 let forwardTutorial = document.getElementById("forwardTutorial")
+let tuText = document.getElementById("tuText")
 
 
 let mode = 1
@@ -155,7 +156,7 @@ function updateTut(tut){
     }else if(tut==25){
 
     }else{
-        tutorialText.innerHTML = tuTelas[tut].texto
+        tuText.innerHTML = tuTelas[tut].texto
         tutorialGif.src = tuTelas[tut].imagem
     }
 }
