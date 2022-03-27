@@ -69,6 +69,7 @@ function changePage(page){
             tela2.style.display = "none"
             tela3.style.display = "flex"
             tela3.style.animation = "tela132 2s"
+            window.scroll(0, 100);
         },1000)
     }
 }
