@@ -22,13 +22,11 @@ let container2 = document.getElementById("container2")
 let container3 = document.getElementById("container3")
 
 let plus = document.getElementById("plus")
-let backFromAdd = document.getElementById("backFromAdd")
 
 let bag = document.getElementById("bag")
 let carrinho = document.getElementById("carrinho")
 let perfil = document.getElementById("perfil")
 
-let addMoney = document.getElementById("addMoney")
 let pagamentoDiv = document.getElementById("pagamentoDiv")
 
 let divComidas = document.getElementById("comidas")
@@ -48,7 +46,6 @@ let totalValue = document.getElementById("totalValue")
 
 let notificationDiv = document.getElementById("notificationDiv")
 
-let currentMoney = document.getElementById("currentMoney")
 let copySymbol = document.getElementById("copySymbol")
 
 let mode = 1
@@ -221,10 +218,8 @@ function displayFood(id, type, elt, qtd=0){
 function displayBalance(){
     if(Number.isInteger(user.saldo)){
         saldo.innerHTML = "Saldo: R$"+user.saldo+",00"
-        currentMoney.innerHTML = "Saldo atual: R$"+user.saldo+",00"
     }else{
         saldo.innerHTML = "Saldo: R$"+user.saldo
-        currentMoney.innerHTML = "Saldo atual: R$"+user.saldo
     }
 }
 
@@ -294,9 +289,7 @@ perfil.addEventListener("click", ()=>{
     perfil.style.borderTop = "white 5px solid"
 })
 
-/*addMoney.addEventListener("click", ()=>{
-    pagamentoDiv.style.display = "block"
-})*/
+
 copySymbol.addEventListener("click", ()=>{
     alert("a")
     navigator.clipboard.writeText("c802a08e-def8-4202-b6c1-72f137327329")
