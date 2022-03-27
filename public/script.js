@@ -162,7 +162,9 @@ function updateTut(tut){
         tutorialGif.play()
         tuText.innerHTML = tuTelas[tut].texto
         sauce.src = tuTelas[tut].imagem
-        window.scroll(0, 100);
+        setTimeout(()=>{
+            window.scroll(0, 100);
+        }, 1000)
     }
 }
 
