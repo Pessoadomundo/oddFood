@@ -87,6 +87,10 @@ function changePage(page){
             tela3.style.display = "flex"
             tela3.style.animation = "tela132 2s"
             window.scroll(0, 100);
+            tutorialGif.load()
+            tutorialGif.play()
+            tuText.innerHTML = tuTelas[tut].texto
+            sauce.src = tuTelas[tut].imagem
         },1000)
     }
 }
