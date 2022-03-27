@@ -48,14 +48,29 @@ let notificationDiv = document.getElementById("notificationDiv")
 
 let copySymbol = document.getElementById("copySymbol")
 
+let tutorialGif = document.getElementById("tutorialGif")
+let tutorialText = document.getElementById("tutorialText")
+let backTutorial = document.getElementById("backTutorial")
+let forwardTutorial = document.getElementById("forwardTutorial")
+
+
 let mode = 1
 
+let tuTela = 0
 
-
-
+let tuTelas = [{"texto": "Passo 1: Criar a conta", "imagem": "tela.png"}, {"texto": "Passo 2: Fazer Login", "imagem": "carrinho.png"}]
 
 
 function changePage(page){
+    if(page==1){
+        tela3.style.animation = "tela13 1s"   
+        setTimeout(()=>{
+            tela1.style.display = "block"
+            tela2.style.display = "none"
+            tela3.style.display = "none"
+            tela1.style.animation = "tela132 2s"
+        }, 1000)
+    }
     if(page==2){
         tela1.style.display = "none"
         tela2.style.display = "block"
@@ -132,6 +147,17 @@ function addToCart(id, amount){
     setTimeout(()=>{
         updateCart()
     },500)
+}
+
+function updateTut(tut){
+    if(tut<0){
+        changePage(1)
+    }else if(tut==25){
+
+    }else{
+        tutorialText.innerHTML = tuTelas[tut].texto
+        tutorialGif.src = tuTelas[tut].imagem
+    }
 }
 
 function displayFood(id, type, elt, qtd=0){
@@ -326,6 +352,16 @@ useBalance.addEventListener("click", ()=>{
     }else{
         displayAlert("Carrinho vazio", false)
     }
+})
+
+backTutorial.addEventListener("click", ()=>{
+    tuTela-=1
+    updateTut(tuTela)
+})  
+
+forwardTutorial.addEventListener("click", ()=>{
+    tuTela+=1
+    updateTut(tuTela)
 })
 
 socket.on("loginState", data=>{
