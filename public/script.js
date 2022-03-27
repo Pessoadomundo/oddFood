@@ -60,7 +60,7 @@ let mode = 1
 
 let tuTela = 0
 
-let tuTelas = [{"texto": "Passo 1: Criar a conta", "imagem": "tela1.mov"}, {"texto": "Passo 2: Fazer Login", "imagem": "tela2.mov"}, {"texto": "Passo 3: Adicionar Saldo", "imagem": "tela3.mov"}, {"texto": "Passo 4: Fazer Pedido", "imagem": "tela4.mov"}]
+let tuTelas = [{"texto": "Passo 1: Criar a conta", "imagem": "tela1.mov"}, {"texto": "Passo 2: Fazer Login", "imagem": "tela2.mov"}, {"texto": "Passo 3: Adicionar Saldo", "imagem": "tela3.mov"}, {"texto": "Passo 4: Fazer Pedido", "imagem": "tela4.mov"}, {"texto": "", "imagem": "tela5.mov"}]
 
 
 function changePage(page){
@@ -154,8 +154,8 @@ function addToCart(id, amount){
 function updateTut(tut){
     if(tut<0){
         changePage(1)
-    }else if(tut==25){
-
+    }else if(tut>=5){
+        changePage(1)
     }else{
         tutorialGif.load()
         tutorialGif.play()
