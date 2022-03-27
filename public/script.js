@@ -167,7 +167,6 @@ function updateTut(tut){
         }, 1000)
     }
 }
-
 function displayFood(id, type, elt, qtd=0){
     let food = foods[id]
 
