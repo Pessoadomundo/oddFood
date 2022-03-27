@@ -87,7 +87,7 @@ function changePage(page){
             tela3.style.display = "flex"
             tela3.style.animation = "tela132 2s"
             window.scroll(0, 100);
-            updateTut()
+            updateTut(0)
         },1000)
     }
 }
