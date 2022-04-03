@@ -1,4 +1,4 @@
-const socket = io('74.207.230.69')
+const socket = io('http://oddfood.ddns.net/')
 
 let day = -1 
 let days = ["Terça", "Quarta", "Quinta", "Sexta"]
