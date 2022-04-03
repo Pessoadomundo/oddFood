@@ -119,13 +119,13 @@ function putFoods(){
         if(day==0 && foods[i].id>3){
             displayFood(foods[i].id, 1, divComidas)
         }
-        if(day==1 && !([0,1,4,5].includes(food.id))){
+        if(day==1 && !([0,1,4,5].includes(foods[i].id))){
             displayFood(foods[i].id, 1, divComidas)
         }
-        if(day==2 && !([2,3,4,5].includes(food.id))){
+        if(day==2 && !([2,3,4,5].includes(foods[i].id))){
             displayFood(foods[i].id, 1, divComidas)
         }
-        if(day==3 && food.id>5){
+        if(day==3 && foods[i].id>5){
             displayFood(foods[i].id, 1, divComidas)
         }
     }
