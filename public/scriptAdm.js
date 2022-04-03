@@ -2,6 +2,7 @@ const socket = io('http://oddfood.ddns.net/')
 
 let day = -1 
 let days = ["Terça", "Quarta", "Quinta", "Sexta"]
+socket.emit("getDay", true)
 
 document.getElementById("search").addEventListener("click", ()=>{
     socket.emit("ADMaddMoney", document.getElementById("key").value, document.getElementById("valor").value)
