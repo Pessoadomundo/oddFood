@@ -228,7 +228,11 @@ io.on('connection', socket => {
     fs.writeFile('users.json', JSON.stringify(users), (err) => {})  
   })
   socket.on("eraseOrders", a=>{
-    day+=1
+    if(day<3){
+      day+=1
+    }else{
+      day=0
+    }
     for (let i = 0; i < users.length; i++) {
       users[i].pending = []
     }
