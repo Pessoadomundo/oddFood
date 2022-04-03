@@ -62,6 +62,10 @@ let tuTela = 0
 
 let tuTelas = [{"texto": "Passo 1: Criar a conta", "imagem": "tela1.mov"}, {"texto": "Passo 2: Fazer Login", "imagem": "tela2.mov"}, {"texto": "Passo 3: Adicionar Saldo", "imagem": "tela3.mov"}, {"texto": "Passo 4: Fazer Pedido", "imagem": "tela4.mov"}, {"texto": "Fim do Tutorial", "imagem": "tela5.mov"}]
 
+let day = -1
+
+socket.emit("getDay", true)
+
 
 function changePage(page){
     if(page==1){
@@ -415,6 +419,7 @@ socket.on("regState", data=>{
 socket.on("updateUser", data=>{
     user = data
     console.log(user)
+    socket.emit("getDay", true)
 })
 
 socket.on("balancePayResp", (state, saldo)=>{
@@ -430,6 +435,10 @@ socket.on("balancePayResp", (state, saldo)=>{
         updateCart()
         updatePending()
     },500)
+})
+
+socket.on("day", dia=>{
+    day = dia
 })
 
 async function a(){
