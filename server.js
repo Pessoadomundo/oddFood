@@ -234,11 +234,11 @@ io.on('connection', socket => {
     }
   })
   socket.on("getDay", a=>{
-    io.to(id).emit("day", dia)
+    io.to(id).emit("day", day)
   })
   socket.on("addDay", a=>{
     dia+=1
-    io.to(id).emit("day", dia)
+    io.to(id).emit("day", day)
   })
 })
 
