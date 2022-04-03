@@ -54,7 +54,7 @@ let backTutorial = document.getElementById("backTutorial")
 let forwardTutorial = document.getElementById("forwardTutorial")
 let tuText = document.getElementById("tuText")
 let sauce = document.getElementById("sauce")
-
+let sendingDay = document.getElementById("sendingDay")
 
 let mode = 1
 
@@ -63,6 +63,7 @@ let tuTela = 0
 let tuTelas = [{"texto": "Passo 1: Criar a conta", "imagem": "tela1.mov"}, {"texto": "Passo 2: Fazer Login", "imagem": "tela2.mov"}, {"texto": "Passo 3: Adicionar Saldo", "imagem": "tela3.mov"}, {"texto": "Passo 4: Fazer Pedido", "imagem": "tela4.mov"}, {"texto": "Fim do Tutorial", "imagem": "tela5.mov"}]
 
 let day = -1
+let days = ["Terça", "Quarta", "Quinta", "Sexta"]
 
 socket.emit("getDay", true)
 
@@ -439,6 +440,7 @@ socket.on("balancePayResp", (state, saldo)=>{
 
 socket.on("day", dia=>{
     day = dia
+    sendingDay.innerText = "Dia de Entrega: " + days[day]
 })
 
 async function a(){
