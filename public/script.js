@@ -112,7 +112,18 @@ function putFoods(){
     divComidas.innerHTML = ""
 
     for (let i = 0; i < foods.length; i++) {
-        displayFood(foods[i].id, 1, divComidas)
+        if(day==0 && foods[i].id>3){
+            displayFood(foods[i].id, 1, divComidas)
+        }
+        if(day==1 && !([0,1,4,5].includes(food.id))){
+            displayFood(foods[i].id, 1, divComidas)
+        }
+        if(day==2 && !([2,3,4,5].includes(food.id))){
+            displayFood(foods[i].id, 1, divComidas)
+        }
+        if(day==3 && food.id>5){
+            displayFood(foods[i].id, 1, divComidas)
+        }
     }
 }
 

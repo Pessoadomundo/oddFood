@@ -237,7 +237,7 @@ io.on('connection', socket => {
     io.to(id).emit("day", day)
   })
   socket.on("addDay", a=>{
-    if(day<4){
+    if(day<3){
       day+=1
     }else{
       day=0
