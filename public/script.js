@@ -419,7 +419,6 @@ socket.on("regState", data=>{
 
 socket.on("updateUser", data=>{
     user = data
-    console.log(user)
     socket.emit("getDay", true)
 })
 
