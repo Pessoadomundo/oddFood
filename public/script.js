@@ -46,7 +46,7 @@ let totalValue = document.getElementById("totalValue")
 
 let notificationDiv = document.getElementById("notificationDiv")
 
-let copySymbol = document.getElementById("copySymbol")
+//let copySymbol = document.getElementById("copySymbol")
 
 let tutorialGif = document.getElementById("tutorialGif")
 let tutorialText = document.getElementById("tutorialText")
@@ -341,12 +341,12 @@ perfil.addEventListener("click", ()=>{
     perfil.style.borderTop = "white 5px solid"
 })
 
-
+/*
 copySymbol.addEventListener("click", ()=>{
     //navigator.clipboard.writeText("c802a08e-def8-4202-b6c1-72f137327329")
     displayAlert("Código Pix copiado", true)
 })
-
+*/
 pagamentoDiv.addEventListener("click", ()=>{
     setTimeout(()=>{
         pagamentoDiv.style.display = "none"
