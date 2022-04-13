@@ -66,7 +66,9 @@ function getNamedOrders(){
       console.log(food)
       comidas+=foods[food.id].name+"x"+food.qtd+", "
     })
-    text+=user.email+" - "+comidas+"\n"
+    if(comidas.length>2){
+      text+=user.email+" - "+comidas+"\n"
+    }
   }
   })
   return text
@@ -134,6 +136,9 @@ io.on('connection', socket => {
   })
   socket.on('registrar', (email, senha, chavePix) => {
     let found = false
+    if(email[email.length-1]==" "){
+      email = email.substring(0, email.length-1)
+    }
     users.forEach(user => {
       if(user.email==email || user.chavePix == chavePix){
           found = true
@@ -234,6 +239,7 @@ io.on('connection', socket => {
       day=0
     }
     for (let i = 0; i < users.length; i++) {
+      users[i].cart = []
       users[i].pending = []
     }
   })
