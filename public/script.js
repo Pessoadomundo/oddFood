@@ -438,9 +438,9 @@ socket.on("balancePayResp", (state, saldo)=>{
 
 socket.on("day", dia=>{
     if(day!=dia){
+        day = dia
         putFoods()
     }
-    day = dia
     sendingDay.innerText = "Dia de Entrega: " + days[day]
 })
 
@@ -448,6 +448,7 @@ async function a(){
     setInterval(()=>{
         socket.emit("askUser", user.id)
         displayBalance()
+        updateCart()
     },10000)
   }
   a()
