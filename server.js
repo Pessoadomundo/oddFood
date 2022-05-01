@@ -233,7 +233,7 @@ io.on('connection', socket => {
         found = true
         users[i].saldo+=parseInt(amount)
         io.to(id).emit("ADMresult", "Deu certo")
-        lastActions.unshift(users[index].email + " teve R$"+ amount +" adicionados a conta ("+new Date.getHours()+":"+new Date.getMinutes()+")")
+        lastActions.unshift(users[i].email + " teve R$"+ amount +" adicionados a conta ("+new Date.getHours()+":"+new Date.getMinutes()+")")
       }
     }
     if(found==false){
