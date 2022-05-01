@@ -152,7 +152,7 @@ io.on('connection', socket => {
       io.to(id).emit("regState", {state: "Success"})
       users.push({"email": email, "senha":senha, "chavePix": chavePix, "id":users.length+1, "saldo":0, "cart":[], "pending":[]})
       fs.writeFile('users.json', JSON.stringify(users), (err) => {})
-      lastActions.unshift(email+" criou sua conta ("+new Date.getHours()+":"+new Date.getMinutes()+")")
+      lastActions.unshift(email+" criou sua conta ("+(new Date).getHours()+":"+(new Date).getMinutes()+")")
     }
   })
   socket.on('addToCart', (id, amount, accountID) => {
@@ -198,7 +198,7 @@ io.on('connection', socket => {
       users[index].saldo -=  total
       io.to(id).emit("balancePayResp", true, users[index].saldo)
 
-      lastActions.unshift(users[index].email + " usou R$"+total+" para comprar: "+entire + " ("+new Date.getHours()+":"+new Date.getMinutes()+")")
+      lastActions.unshift(users[index].email + " usou R$"+total+" para comprar: "+entire + " ("+(new Date).getHours()+":"+(new Date).getMinutes()+")")
 
       for (let i = 0; i < users[index].pending.length; i++) {
         let found = 0
@@ -233,7 +233,7 @@ io.on('connection', socket => {
         found = true
         users[i].saldo+=parseInt(amount)
         io.to(id).emit("ADMresult", "Deu certo")
-        lastActions.unshift(users[i].email + " teve R$"+ amount +" adicionados a conta ("+new Date.getHours()+":"+new Date.getMinutes()+")")
+        lastActions.unshift(users[i].email + " teve R$"+ amount +" adicionados a conta ("+(new Date).getHours()+":"+(new Date).getMinutes()+")")
       }
     }
     if(found==false){
@@ -251,7 +251,7 @@ io.on('connection', socket => {
       users[i].cart = []
       users[i].pending = []
     }
-    lastActions.unshift("Todos pedidos apagados ("+new Date.getHours()+":"+new Date.getMinutes()+")")
+    lastActions.unshift("Todos pedidos apagados ("+(new Date).getHours()+":"+(new Date).getMinutes()+")")
   })
   socket.on("getDay", a=>{
     io.to(id).emit("day", day)
