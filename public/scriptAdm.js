@@ -4,7 +4,7 @@ let day = -1
 let days = ["Terça", "Quarta", "Quinta", "Sexta"]
 let lastActions = []
 socket.emit("getDay", true)
-socket.emit("getLastActions, true")
+socket.emit("getLastActions", true)
 
 document.getElementById("search").addEventListener("click", ()=>{
     socket.emit("ADMaddMoney", document.getElementById("key").value, document.getElementById("valor").value)
