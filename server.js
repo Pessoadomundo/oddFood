@@ -192,7 +192,7 @@ io.on('connection', socket => {
     let entire = ""
     users[index].cart.forEach(item=>{
       total+=item.qtd*foods[item.id].preco
-      entire+=""+foods[item.id]+"x"+item.qtd
+      entire+=""+foods[item.id].name+"x"+item.qtd
     })
     if(users[index].saldo>=total){
       users[index].saldo -=  total
