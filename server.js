@@ -26,6 +26,8 @@ const foods = [{"name": "Parmegiana (Pequeno)", "preco":20, "id":0, "img": "5.jp
 let orders = [{"nome":"Parmegiana (Pequeno)", "qtd": 0}, {"nome":"Parmegiana (Grande)", "qtd": 0}, {"nome":"Strogonoff (Pequeno)", "qtd": 0}, {"nome":"Strogonoff (Grande)", "qtd": 0}, {"nome":"Almôndegas (Pequeno)", "qtd": 0}, {"nome":"Almôndegas (Grande)", "qtd": 0}, {"nome":"Alcatra (Pequeno)", "qtd": 0}, {"nome":"Alcatra (Grande)", "qtd": 0}, {"nome":"Chorizo (Pequeno)", "qtd": 0}, {"nome":"Chorizo (Grande)", "qtd": 0}, {"nome":"Filé Mignon (Pequeno)", "qtd": 0}, {"nome":"Filé Mignon (Grande)", "qtd": 0}, {"nome":"Frango (Pequeno)", "qtd": 0}, {"nome":"Frango (Grande)", "qtd": 0}, {"nome":"Hambúger Vegano (Pequeno)", "qtd": 0}, {"nome":"Hambúrger Vegano (Grande)", "qtd": 0}, {"nome":"Lombo (Pequeno)", "qtd": 0}, {"nome":"Lombo (Grande)", "qtd": 0}, {"nome":"Omelete (Pequeno)", "qtd": 0}, {"nome":"Omelete (Grande)", "qtd": 0}, {"nome":"Picanha (Pequeno)", "qtd": 0}, {"nome":"Picanha (Grande)", "qtd": 0}, {"nome":"Tilápia (Pequeno)", "qtd": 0}, {"nome":"Tilápia (Grande)", "qtd": 0}, {"nome":"Sanduíche de Frango", "qtd": 0}, {"nome":"Sanduíche de Alcatra", "qtd": 0}, {"nome":"Sanduíche de Filé Mignon", "qtd": 0}, {"nome":"Fritas (400g)", "qtd": 0}, {"nome":"Fritas com Bacon e Queijo (400g)", "qtd": 0}, {"nome":"Bolinhos de Bacalhau (15)", "qtd": 0}, {"nome":"Prato Kids", "qtd": 0}, {"nome":"Coca Cola Lata", "qtd": 0}, {"nome":"Coca Cola Zero Lata", "qtd": 0}, {"nome":"Suco de Uva (330ml)", "qtd": 0}, {"nome":"Suco de Pêssego (330ml)", "qtd": 0}, {"nome":"Suco de Manga (330ml)", "qtd": 0}, {"nome":"Água Natural", "qtd": 0}, {"nome":"Água com Gás", "qtd": 0}, {"nome":"H2OH!", "qtd": 0}, {"nome":"Bombom Sonho de Valsa", "qtd": 0}, {"nome":"Bombom Ouro Branco", "qtd": 0}, {"nome":"Brownie", "qtd": 0}, {"nome":"Chocolate 5 Star", "qtd": 0}, {"nome":"Chocolate Laka Branco", "qtd": 0}, {"nome":"Chocolate Diamante Negro", "qtd": 0}, {"nome":"Halls Extra Forte", "qtd": 0}, {"nome":"Halls de Morango", "qtd": 0}, {"nome":"Trident de Hortelã", "qtd": 0}, {"nome":"Trident de Morango", "qtd": 0}]
 let day = 0
 
+let lastActions = []
+
 function getUserIndex(id){
   let index = 0
   let i = 0 
@@ -150,6 +152,7 @@ io.on('connection', socket => {
       io.to(id).emit("regState", {state: "Success"})
       users.push({"email": email, "senha":senha, "chavePix": chavePix, "id":users.length+1, "saldo":0, "cart":[], "pending":[]})
       fs.writeFile('users.json', JSON.stringify(users), (err) => {})
+      lastActions.unshift(email+" criou sua conta")
     }
   })
   socket.on('addToCart', (id, amount, accountID) => {
@@ -186,12 +189,17 @@ io.on('connection', socket => {
   socket.on("balancePayAsk", (accountID)=>{
     let index = getUserIndex(accountID)
     let total = 0
+    let entire = ""
     users[index].cart.forEach(item=>{
       total+=item.qtd*foods[item.id].preco
+      entire+=""+foods[item.id]+"x"+item.qtd
     })
     if(users[index].saldo>=total){
       users[index].saldo -=  total
       io.to(id).emit("balancePayResp", true, users[index].saldo)
+
+      lastActions.unshift(users[index].email + " usou R$"+total+" para comprar: "+entire)
+
       for (let i = 0; i < users[index].pending.length; i++) {
         let found = 0
         for (let o = 0; o < users[index].cart.length; o++) {
@@ -225,6 +233,7 @@ io.on('connection', socket => {
         found = true
         users[i].saldo+=parseInt(amount)
         io.to(id).emit("ADMresult", "Deu certo")
+        lastActions.unshift(users[index].email + " teve R$"+ amount +" adicionados a conta")
       }
     }
     if(found==false){
@@ -242,9 +251,13 @@ io.on('connection', socket => {
       users[i].cart = []
       users[i].pending = []
     }
+    lastActions.unshift("Todos pedidos apagados")
   })
   socket.on("getDay", a=>{
     io.to(id).emit("day", day)
+  })
+  socket.on("getLastActions", a=>{
+    io.to(id).emit("lastActions", lastActions)
   })
   socket.on("addDay", a=>{
     if(day<3){
@@ -255,20 +268,3 @@ io.on('connection', socket => {
     io.to(id).emit("day", day)
   })
 })
-
-/*
-async function a(){
-  setInterval(()=>{
-    if((new Date).getHours()==13){
-      if([2,3,4,5,6].includes((new Date).getDay)){
-        users.forEach(user=>{
-          user.cart = []
-          user.pending = []
-        })
-      }
-    }
-  },6000000)
-}
-a()
-
-*/
