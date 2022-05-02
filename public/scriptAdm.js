@@ -19,7 +19,7 @@ document.getElementById("addDay").addEventListener("click", ()=>{
     socket.emit("addDay", true)
 })
 document.getElementById("changeInfo").addEventListener("click", ()=>{
-    socket.emit("changeUserInfo", document.getElementById("changingUserId"), document.getElementById("changingInfoType"), document.getElementById("changingInfo"))
+    socket.emit("changeUserInfo", document.getElementById("changingUserId").value, document.getElementById("changingInfoType").value, document.getElementById("changingInfo").value)
     console.log(document.getElementById("changingUserId").value, document.getElementById("changingInfoType").value, document.getElementById("changingInfo").value)
     alert("Acho q mudou")
 })
