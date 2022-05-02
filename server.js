@@ -192,7 +192,7 @@ io.on('connection', socket => {
     let entire = ""
     users[index].cart.forEach(item=>{
       total+=item.qtd*foods[item.id].preco
-      entire+=""+foods[item.id].name+"x"+item.qtd
+      entire+=""+foods[item.id].name+"x"+item.qtd+", "
     })
     if(users[index].saldo>=total){
       users[index].saldo -=  total
@@ -266,5 +266,13 @@ io.on('connection', socket => {
       day=0
     }
     io.to(id).emit("day", day)
+  })
+  socket.on("changeUserInfo", (userid, infoType, info)=>{
+    for (let i = 0; i < users.length; i++) {
+      if(users.id==userid){
+        users[i][infoType] = info
+        fs.writeFile('users.json', JSON.stringify(users), (err) => {})
+      }
+    }
   })
 })

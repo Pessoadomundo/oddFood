@@ -18,6 +18,9 @@ document.getElementById("eraseOrders").addEventListener("click", ()=>{
 document.getElementById("addDay").addEventListener("click", ()=>{
     socket.emit("addDay", true)
 })
+document.getElementById("changeInfo").addEventListener("click", ()=>{
+    socket.emit("changeUserInfo", document.getElementById("changingUserId"), document.getElementById("changingInfoType"), document.getElementById("changingInfo"))
+})
 socket.on("ADMresult", resultado=>{
     alert(resultado)
 })
