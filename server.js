@@ -211,12 +211,15 @@ io.on('connection', socket => {
           }
         }
       }
-      
+      console.log("Begginging "+users[index].cart)
       for (let p = 0; p <= users[index].cart.length; p++) {
           if(users[index].cart[0]!=null){
+            console.log("1 "+users[index].cart)
             users[index].pending.push(users[index].cart[0])
           }  
-            users[index].cart.splice(0, 1)
+          console.log("2 "+users[index].cart)
+          users[index].cart.splice(0, 1)
+          console.log("3 "+users[index].cart)
       }
       io.to(id).emit("updateUser", users[index])
       fs.writeFile('users.json', JSON.stringify(users), (err) => {})  
