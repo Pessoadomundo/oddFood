@@ -212,7 +212,7 @@ io.on('connection', socket => {
         }
       }
       console.log("Begginging "+users[index].cart)
-      for (let p = 0; p <= users[index].cart.length; p++) {
+      for (let p = 0; p < users[index].cart.length+2; p++) {
           if(users[index].cart[0]!=null){
             console.log("1 "+JSON.stringify(users[index].cart))
             users[index].pending.push(users[index].cart[0])
