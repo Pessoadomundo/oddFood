@@ -269,7 +269,7 @@ io.on('connection', socket => {
   })
   socket.on("changeUserInfo", (userid, infoType, info)=>{
     for (let i = 0; i < users.length; i++) {
-      if(users.id==userid){
+      if(users[i].id==userid){
         users[i][infoType] = info
         fs.writeFile('users.json', JSON.stringify(users), (err) => {})
       }
