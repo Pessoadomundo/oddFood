@@ -212,7 +212,7 @@ io.on('connection', socket => {
         }
       }
       
-      for (let p = 0; p < users[index].cart.length; p++) {
+      for (let p = 0; p <= users[index].cart.length; p++) {
           if(users[index].cart[0]!=null){
             users[index].pending.push(users[index].cart[0])
           }  
