@@ -271,6 +271,7 @@ io.on('connection', socket => {
     for (let i = 0; i < users.length; i++) {
       if(users[i].id==userid){
         users[i][infoType] = info
+        console.log(userid, infoType, info)
         fs.writeFile('users.json', JSON.stringify(users), (err) => {})
       }
     }
