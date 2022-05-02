@@ -20,7 +20,7 @@ document.getElementById("addDay").addEventListener("click", ()=>{
 })
 document.getElementById("changeInfo").addEventListener("click", ()=>{
     socket.emit("changeUserInfo", document.getElementById("changingUserId"), document.getElementById("changingInfoType"), document.getElementById("changingInfo"))
-    console.log(document.getElementById("changingUserId"), document.getElementById("changingInfoType"), document.getElementById("changingInfo"))
+    console.log(document.getElementById("changingUserId").value, document.getElementById("changingInfoType").value, document.getElementById("changingInfo").value)
     alert("Acho q mudou")
 })
 socket.on("ADMresult", resultado=>{
