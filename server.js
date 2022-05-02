@@ -269,11 +269,10 @@ io.on('connection', socket => {
   })
   socket.on("changeUserInfo", (userid, infoType, info)=>{
     for (let i = 0; i < users.length; i++) {
-      console.log(userid, infoType, info)
       if(users[i].id==userid){
         users[i][infoType] = info
-        console.log(userid, infoType, info)
         fs.writeFile('users.json', JSON.stringify(users), (err) => {})
+        lastActions.unshift(infoType+" do usuário de ID "+userid+" foi alterado/a para "+ info)
       }
     }
   })
