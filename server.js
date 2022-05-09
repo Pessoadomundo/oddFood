@@ -84,7 +84,7 @@ function getFinalOrders(){
     let comidas = ""
     user.pending.forEach(food=>{
       if(food.id<=29){
-        comidas+=foods[food.id].name+"x"+food.qtd+", "
+        comidas+=foods[food.id].name+"x"+order.qtd+", "
       }
     })
     if(comidas.length>2){
@@ -92,13 +92,15 @@ function getFinalOrders(){
     }
   }
   })
+  let index = 0
   orders.forEach(order=>{
-    if(order.id>=30 && order.id<=37){
-      bebidas+=order.nome+"x"+food.qtd+", "
+    if(foods[index].id>=30 && foods[index].id<=37){
+      bebidas+=order.nome+"x"+order.qtd+", "
     }
-    if(order.id>=38){
-      sobremesas+=order.nome+"x"+food.qtd+", "
+    if(foods[index].id>=38){
+      sobremesas+=order.nome+"x"+order.qtd+", "
     }
+    index+=1
   })
   text+="\n Bebidas - "
   text+=bebidas
@@ -247,7 +249,7 @@ io.on('connection', socket => {
 
       for (let i = 0; i < users[index].pending.length; i++) {
         let found = 0
-        for (let o = 0; o < users[index].cart.length; o++) {
+        for (let o = 0; o < users[index].cart.length+5; o++) {
           if(users[index].pending[i].id == users[index].cart[found].id){
             users[index].pending[i].qtd+=users[index].cart[found].qtd
             users[index].cart.splice(found, 1)
