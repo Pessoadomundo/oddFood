@@ -8,19 +8,23 @@ socket.emit("getLastActions", true)
 
 document.getElementById("search").addEventListener("click", ()=>{
     socket.emit("ADMaddMoney", document.getElementById("key").value, document.getElementById("valor").value)
+    socket.emit("getLastActions", true)
 })
 
 document.getElementById("eraseOrders").addEventListener("click", ()=>{
     socket.emit("eraseOrders", true)
     socket.emit("getDay", true)
+    socket.emit("getLastActions", true)
 })
 
 document.getElementById("addDay").addEventListener("click", ()=>{
     socket.emit("addDay", true)
+    socket.emit("getLastActions", true)
 })
 document.getElementById("changeInfo").addEventListener("click", ()=>{
     socket.emit("changeUserInfo", document.getElementById("changingUserId").value, document.getElementById("changingInfoType").value, document.getElementById("changingInfo").value)
     alert("Acho q mudou")
+    socket.emit("getLastActions", true)
 })
 socket.on("ADMresult", resultado=>{
     alert(resultado)
@@ -38,3 +42,10 @@ socket.on("lastActions", actions=>{
         document.getElementById("lastActions").appendChild(actionLi)
     })
 })
+
+async function a(){
+    setInterval(()=>{
+        socket.emit("getLastActions", true)
+    },10000)
+  }
+a()
