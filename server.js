@@ -84,7 +84,7 @@ function getFinalOrders(){
     let comidas = ""
     user.pending.forEach(food=>{
       if(food.id<=29){
-        comidas+=foods[food.id].name+"x"+order.qtd+", "
+        comidas+=foods[food.id].name+"x"+food.qtd+", "
       }
     })
     if(comidas.length>2){
