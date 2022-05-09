@@ -250,9 +250,9 @@ io.on('connection', socket => {
       for (let i = 0; i < users[index].pending.length; i++) {
         let found = 0
         for (let o = 0; users[index].cart.length>0; o++) {
-          if(users[index].pending[i].id == users[index].cart[found].id){
-            users[index].pending[i].qtd+=users[index].cart[found].qtd
-            users[index].cart.splice(found, 1)
+          if(users[index].pending[i].id == users[index].cart[o-found].id){
+            users[index].pending[i].qtd+=users[index].cart[o-found].qtd
+            users[index].cart.splice(o-found, 1)
           }else{
             found++
           }
