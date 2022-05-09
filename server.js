@@ -94,10 +94,10 @@ function getFinalOrders(){
   })
   let index = 0
   orders.forEach(order=>{
-    if(foods[index].id>=30 && foods[index].id<=37){
+    if(foods[index].id>=30 && foods[index].id<=37 && order.qtd>0){
       bebidas+=order.nome+"x"+order.qtd+", "
     }
-    if(foods[index].id>=38){
+    if(foods[index].id>=38 && order.qtd>0){
       sobremesas+=order.nome+"x"+order.qtd+", "
     }
     index+=1
