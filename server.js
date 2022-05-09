@@ -249,7 +249,7 @@ io.on('connection', socket => {
 
       for (let i = 0; i < users[index].pending.length; i++) {
         let found = 0
-        for (let o = 0; o < users[index].cart.length+5; o++) {
+        for (let o = 0; users[index].cart.length>0; o++) {
           if(users[index].pending[i].id == users[index].cart[found].id){
             users[index].pending[i].qtd+=users[index].cart[found].qtd
             users[index].cart.splice(found, 1)
