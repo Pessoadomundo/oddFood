@@ -26,6 +26,9 @@ document.getElementById("changeInfo").addEventListener("click", ()=>{
     alert("Acho q mudou")
     socket.emit("getLastActions", true)
 })
+document.getElementById("eraseHistory").addEventListener("click", ()=>{
+    document.getElementById("lastActions").innerHTML=""
+})
 socket.on("ADMresult", resultado=>{
     alert(resultado)
 })
