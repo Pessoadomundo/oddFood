@@ -253,14 +253,13 @@ io.on('connection', socket => {
           if(users[index].pending[i].id == users[index].cart[found].id){
             users[index].pending[i].qtd+=users[index].cart[found].qtd
             users[index].cart.splice(found, 1)
-            found++
           }else{
-            console.log("a")
+            found++
           }
         }
       }
       console.log("Begginging "+users[index].cart)
-      for (let p = 0; p < users[index].cart.length+2; p++) {
+      for (let p = 0; users[index].cart.length>0; p++) {
           if(users[index].cart[0]!=null){
             console.log("1 "+JSON.stringify(users[index].cart))
             users[index].pending.push(users[index].cart[0])
