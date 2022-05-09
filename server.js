@@ -65,7 +65,6 @@ function getNamedOrders(){
     if(user.pending!=[]){
     let comidas = ""
     user.pending.forEach(food=>{
-      console.log(food)
       comidas+=foods[food.id].name+"x"+food.qtd+", "
     })
     if(comidas.length>2){
@@ -73,6 +72,39 @@ function getNamedOrders(){
     }
   }
   })
+  return text
+}
+
+function getFinalOrders(){
+  let text = ""
+  let bebidas = ""
+  let sobremesas = ""
+  users.forEach(user => {
+    if(user.pending!=[]){
+    let comidas = ""
+    user.pending.forEach(food=>{
+      if(food.id<=29){
+        comidas+=foods[food.id].name+"x"+food.qtd+", "
+      }
+    })
+    if(comidas.length>2){
+      text+=user.email+" - "+comidas+"\n"
+    }
+  }
+  })
+  orders.forEach(order=>{
+    if(order.id>=30 && order.id<=37){
+      bebidas+=order.nome+"x"+food.qtd+", "
+    }
+    if(order.id>=38){
+      sobremesas+=order.nome+"x"+food.qtd+", "
+    }
+  })
+  text+="\n Bebidas - "
+  text+=bebidas
+  text+="\n\n Sobremesas - "
+  text+=sobremesas
+  text+="\n\n"
   return text
 }
 
@@ -115,6 +147,19 @@ app.get('/admInfo', function (req, res){
   res.end()
 })
 
+app.get('/finalOrder', function (req, res){
+  getAllOrder()
+  res.write("O pedido é: \n\n")
+  res.write(getFinalOrders())
+  res.write("\n\n\n")
+  res.write("No total são: \n\n")
+  orders.forEach(order=>{
+    if(order.qtd>0){
+      res.write(order.nome+": "+order.qtd+"\n")
+    }
+  })
+  res.end()
+})
 
 
 server.listen(80)
