@@ -35,6 +35,7 @@ socket.on("day", dia=>{
     document.getElementById("nextDay").innerText = "Próxima entrega: " + days[day]
 })
 socket.on("lastActions", actions=>{
+    document.getElementById("lastActions").innerHTML=""
     lastActions = actions
     lastActions.forEach(action => {
         let actionLi = document.createElement("li")
