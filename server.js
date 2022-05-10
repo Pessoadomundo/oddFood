@@ -102,9 +102,9 @@ function getFinalOrders(){
     }
     index+=1
   })
-  text+="\n Bebidas - "
+  text+="\nBebidas - "
   text+=bebidas
-  text+="\n\n Sobremesas - "
+  text+="\n\nSobremesas - "
   text+=sobremesas
   text+="\n\n"
   return text
