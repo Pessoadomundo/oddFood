@@ -202,7 +202,7 @@ function displayFood(id, type, elt, qtd=0){
         document.getElementById("foodInfo").style.position = "fixed"
         document.getElementById("trianglin").style.position = "fixed"
         document.getElementById("foodInfo").style.left = ""+(event.clientX-100)+"px"
-        document.getElementById("foodInfo").style.top = ""+(event.clientY-65)+"px"
+        document.getElementById("foodInfo").style.top = ""+(event.clientY-67)+"px"
         document.getElementById("trianglin").style.left = ""+(event.clientX-30)+"px"
         document.getElementById("trianglin").style.top = ""+(event.clientY-0)+"px"
     })
