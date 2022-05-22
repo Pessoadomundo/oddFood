@@ -160,6 +160,12 @@ app.get('/finalOrder', function (req, res){
       res.write(order.nome+": "+order.qtd+"\n")
     }
   })
+  res.write("\n\n\n")
+  if(day==0 || day==2){
+    res.write("Horário de Entrega: 12:20")
+  }else{
+    res.write("Horário de Entrega: 11:30")
+  }
   res.end()
 })
 
