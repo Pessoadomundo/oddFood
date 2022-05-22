@@ -411,8 +411,8 @@ document.getElementById("foodInfoDiv").addEventListener("click", ()=>{
 })
 
 document.body.addEventListener("scroll", ()=>{
-    document.getElementById("foodInfo").style.top = ""+(initialPos+10+(getYPosition-scrollOffset))+"px"
-    document.getElementById("trianglin").style.top = ""+(initialPos-0+(getYPosition-scrollOffset))+"px"
+    document.getElementById("foodInfo").style.top = ""+(initialPos+10+(getYPosition()-scrollOffset))+"px"
+    document.getElementById("trianglin").style.top = ""+(initialPos-0+(getYPosition()-scrollOffset))+"px"
 })
 
 socket.on("loginState", data=>{
