@@ -200,8 +200,8 @@ function displayFood(id, type, elt, qtd=0){
     eltImgComida.addEventListener("click", (event)=>{
         document.getElementById("foodInfoDiv").style.display = "block"
         document.getElementById("foodInfo").style.position = "fixed"
-        document.getElementById("foodInfo").style.left = ""+(event.clientX-90)+"px"
-        document.getElementById("foodInfo").style.top = ""+(event.clientY-120)+"px"
+        document.getElementById("foodInfo").style.left = ""+(event.clientX-50)+"px"
+        document.getElementById("foodInfo").style.top = ""+(event.clientY-50)+"px"
     })
     eltDivImgComida.appendChild(eltImgComida)
     eltComida.appendChild(eltDivImgComida)
