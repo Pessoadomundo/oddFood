@@ -184,6 +184,10 @@ function updateTut(tut){
         }, 2000)
     }
 }
+function getYPosition(){
+    var top  = window.pageYOffset || document.documentElement.scrollTop
+    return top
+  }
 function displayFood(id, type, elt, qtd=0){
     let food = foods[id]
 
@@ -198,13 +202,14 @@ function displayFood(id, type, elt, qtd=0){
     eltImgComida.classList.add("imgComida")
     eltImgComida.src = "./pratos/"+food.img
     eltImgComida.addEventListener("click", (event)=>{
+        let scrollPos = getYPosition()
         document.getElementById("foodInfoDiv").style.display = "block"
         document.getElementById("foodInfo").style.position = "fixed"
         document.getElementById("trianglin").style.position = "fixed"
         document.getElementById("foodInfo").style.left = ""+(event.clientX-52)+"px"
-        document.getElementById("foodInfo").style.top = ""+(event.clientY+10)+"px"
+        document.getElementById("foodInfo").style.top = ""+(event.clientY+10+scrollPos)+"px"
         document.getElementById("trianglin").style.left = ""+(event.clientX-30)+"px"
-        document.getElementById("trianglin").style.top = ""+(event.clientY-0)+"px"
+        document.getElementById("trianglin").style.top = ""+(event.clientY-0+scrollPos)+"px"
     })
     eltDivImgComida.appendChild(eltImgComida)
     eltComida.appendChild(eltDivImgComida)
