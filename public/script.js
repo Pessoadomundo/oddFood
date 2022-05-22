@@ -198,7 +198,7 @@ function displayFood(id, type, elt, qtd=0){
     eltImgComida.classList.add("imgComida")
     eltImgComida.src = "./pratos/"+food.img
     eltImgComida.addEventListener("click", ()=>{
-        document.getElementById("foodInfoDiv").display = "block"
+        document.getElementById("foodInfoDiv").style.display = "block"
     })
     eltDivImgComida.appendChild(eltImgComida)
     eltComida.appendChild(eltDivImgComida)
