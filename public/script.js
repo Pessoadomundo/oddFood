@@ -65,6 +65,10 @@ let tuTelas = [{"texto": "Passo 1: Criar a conta", "imagem": "tela1.mov"}, {"tex
 let day = -1
 let days = ["Terça (12:25)", "Quarta (11:35)", "Quinta (12:25)", "Sexta (11:35)"]
 
+var scrollOffset = 0
+
+var initialPos = 0
+
 socket.emit("getDay", true)
 
 
@@ -202,14 +206,15 @@ function displayFood(id, type, elt, qtd=0){
     eltImgComida.classList.add("imgComida")
     eltImgComida.src = "./pratos/"+food.img
     eltImgComida.addEventListener("click", (event)=>{
-        let scrollPos = getYPosition()
+        scrollOffset = getYPosition()
+        initialPos = event.clientY
         document.getElementById("foodInfoDiv").style.display = "block"
         document.getElementById("foodInfo").style.position = "fixed"
         document.getElementById("trianglin").style.position = "fixed"
         document.getElementById("foodInfo").style.left = ""+(event.clientX-52)+"px"
-        document.getElementById("foodInfo").style.top = ""+(event.clientY+10+scrollPos)+"px"
+        document.getElementById("foodInfo").style.top = ""+(event.clientY+10)+"px"
         document.getElementById("trianglin").style.left = ""+(event.clientX-30)+"px"
-        document.getElementById("trianglin").style.top = ""+(event.clientY-0+scrollPos)+"px"
+        document.getElementById("trianglin").style.top = ""+(event.clientY-0)+"px"
     })
     eltDivImgComida.appendChild(eltImgComida)
     eltComida.appendChild(eltDivImgComida)
@@ -403,6 +408,11 @@ forwardTutorial.addEventListener("click", ()=>{
 
 document.getElementById("foodInfoDiv").addEventListener("click", ()=>{
     document.getElementById("foodInfoDiv").style.display="none"
+})
+
+document.body.addEventListener("scroll", ()=>{
+    document.getElementById("foodInfo").style.top = ""+(initialPos+10+(getYPosition-scrollOffset))+"px"
+    document.getElementById("trianglin").style.top = ""+(initialPos-0+(getYPosition-scrollOffset))+"px"
 })
 
 socket.on("loginState", data=>{
