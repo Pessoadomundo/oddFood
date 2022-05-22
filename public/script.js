@@ -390,6 +390,10 @@ forwardTutorial.addEventListener("click", ()=>{
     updateTut(tuTela)
 })
 
+document.getElementById("foodInfoDiv").addEventListener("click", ()=>{
+    document.getElementById("foodInfoDiv").display="none"
+})
+
 socket.on("loginState", data=>{
     if(data.state == "Success"){
         user = data.userInfo
