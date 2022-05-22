@@ -197,8 +197,11 @@ function displayFood(id, type, elt, qtd=0){
     let eltImgComida = document.createElement("img")
     eltImgComida.classList.add("imgComida")
     eltImgComida.src = "./pratos/"+food.img
-    eltImgComida.addEventListener("click", ()=>{
+    eltImgComida.addEventListener("click", (event)=>{
         document.getElementById("foodInfoDiv").style.display = "block"
+        document.getElementById("foodInfo").style.position = "fixed"
+        document.getElementById("foodInfo").style.left = ""+event.clientX+"px"
+        document.getElementById("foodInfo").style.top = ""+event.clientY+"px"
     })
     eltDivImgComida.appendChild(eltImgComida)
     eltComida.appendChild(eltDivImgComida)
