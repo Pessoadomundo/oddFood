@@ -391,6 +391,7 @@ forwardTutorial.addEventListener("click", ()=>{
 })
 
 document.getElementById("foodInfoDiv").addEventListener("click", ()=>{
+    alert("a")
     document.getElementById("foodInfoDiv").display="none"
 })
 
