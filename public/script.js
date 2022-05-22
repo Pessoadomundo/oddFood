@@ -203,8 +203,8 @@ function displayFood(id, type, elt, qtd=0){
         document.getElementById("trianglin").style.position = "fixed"
         document.getElementById("foodInfo").style.left = ""+(event.clientX-50)+"px"
         document.getElementById("foodInfo").style.top = ""+(event.clientY-100)+"px"
-        document.getElementById("trianglin").style.left = ""+(event.clientX-50)+"px"
-        document.getElementById("trianglin").style.top = ""+(event.clientY-100)+"px"
+        document.getElementById("trianglin").style.left = ""+(event.clientX-30)+"px"
+        document.getElementById("trianglin").style.top = ""+(event.clientY-70)+"px"
     })
     eltDivImgComida.appendChild(eltImgComida)
     eltComida.appendChild(eltDivImgComida)
