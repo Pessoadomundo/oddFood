@@ -407,9 +407,10 @@ document.getElementById("foodInfoDiv").addEventListener("click", ()=>{
     document.getElementById("foodInfoDiv").style.display="none"
 })
 
-document.body.addEventListener("scroll", ()=>{
+
+document.getElementsByTagName('body')[0].onscroll = () => {
     document.getElementById("foodInfoDiv").style.display="none"
-})
+}
 
 socket.on("loginState", data=>{
     if(data.state == "Success"){
