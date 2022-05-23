@@ -204,16 +204,18 @@ function displayFood(id, type, elt, qtd=0){
     eltImgComida.classList.add("imgComida")
     eltImgComida.src = "./pratos/"+food.img
     eltImgComida.addEventListener("click", (event)=>{
-        scrollOffset = getYPosition()
-        initialPos = event.clientY
-        document.getElementById("foodInfoText").innerText = desc[id]
-        document.getElementById("foodInfoDiv").style.display = "block"
-        document.getElementById("foodInfo").style.position = "fixed"
-        document.getElementById("trianglin").style.position = "fixed"
-        document.getElementById("foodInfo").style.left = ""+(event.clientX-52)+"px"
-        document.getElementById("foodInfo").style.top = ""+(event.clientY+10)+"px"
-        document.getElementById("trianglin").style.left = ""+(event.clientX-30)+"px"
-        document.getElementById("trianglin").style.top = ""+(event.clientY-0)+"px"
+        if(id<30){
+            scrollOffset = getYPosition()
+            initialPos = event.clientY
+            document.getElementById("foodInfoText").innerText = desc[id]
+            document.getElementById("foodInfoDiv").style.display = "block"
+            document.getElementById("foodInfo").style.position = "fixed"
+            document.getElementById("trianglin").style.position = "fixed"
+            document.getElementById("foodInfo").style.left = ""+(event.clientX-52)+"px"
+            document.getElementById("foodInfo").style.top = ""+(event.clientY+10)+"px"
+            document.getElementById("trianglin").style.left = ""+(event.clientX-30)+"px"
+            document.getElementById("trianglin").style.top = ""+(event.clientY-0)+"px"
+        }
     })
     eltDivImgComida.appendChild(eltImgComida)
     eltComida.appendChild(eltDivImgComida)
