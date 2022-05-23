@@ -65,9 +65,6 @@ let tuTelas = [{"texto": "Passo 1: Criar a conta", "imagem": "tela1.mov"}, {"tex
 let day = -1
 let days = ["Terça (12:25)", "Quarta (11:35)", "Quinta (12:25)", "Sexta (11:35)"]
 
-var scrollOffset = 0
-
-var initialPos = 0
 
 socket.emit("getDay", true)
 
@@ -411,9 +408,7 @@ document.getElementById("foodInfoDiv").addEventListener("click", ()=>{
 })
 
 document.body.addEventListener("scroll", ()=>{
-    console.log((getYPosition()-scrollOffset))
-    document.getElementById("foodInfo").style.top = ""+(initialPos+10+(getYPosition()-scrollOffset))+"px"
-    document.getElementById("trianglin").style.top = ""+(initialPos-0+(getYPosition()-scrollOffset))+"px"
+    document.getElementById("foodInfoDiv").style.display="none"
 })
 
 socket.on("loginState", data=>{
