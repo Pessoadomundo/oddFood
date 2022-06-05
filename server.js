@@ -380,7 +380,7 @@ io.on('connection', socket => {
       lote = 999
       aindaVendendo = false
     }
-    if(users[getUserIndex(userid)].saldo>precoIngresso){
+    if(users[getUserIndex(userid)].saldo>=precoIngresso){
       ingressosComprados+=1
       users[getUserIndex(userid)].saldo -= precoIngresso
       users[getUserIndex(userid)].hasTicket = true
