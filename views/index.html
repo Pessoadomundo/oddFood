@@ -11,7 +11,7 @@
     <title>OddFood</title>
     <link rel="shortcut icon" href="icon.png">
 
-    <meta name="description" content="A OddFood é um aplicativo de entrega de comida para alunos do Santo Agostinho Nova Lima">
+    <meta name="description" content="OddFood é um aplicativo de entrega de comida para alunos do Santo Agostinho Nova Lima">
     <meta name="keywords" content="OddFood, odfood, odefood, CSANL, CSAGNL, Santo Agostinho, Santo Agostinho Nova Lima, Santo Agostinho NL, delivery, comida">
     <meta name="author" content="Gabriel Jota">
     <!------------------------------------------------------------------------------------------>
@@ -52,8 +52,21 @@
             </div>
         </div>
             <div id="container">
+                <div id="ingressos">
+                    <div id="ingresso" class="comida">
+                        <div class="divImgComida">
+                            <img class="imgComida" src="./pratos/ingresso.jpg">
+                        </div>
+                        <div class="divInfoComida" id="divInfoIngresso">
+                            <span class="nomeComida" id="nomeIngresso">Ingresso Pós Festa Junina <br>(1º Lote)</span><br>
+                            <span class="preco" id="precoIngresso">R$48,00</span><br>
+                            <button id="buyTicket"><img src="ticket.png" id="ticketImg"></button>
+                        </div>
+                        <br><br>
+                    </div>
+                </div>
                 <div id="comidas">
-                
+                    <h1>Comidas</h1>
                 </div>
             </div>
 
@@ -108,7 +121,7 @@
     <div id="foodInfoDiv">
         <img id="trianglin" src="trianglin.png">
         <div id="foodInfo">
-            <p id="foodInfoText">Tilápia acompanhada de Arroz, Feijão, Fritas e Salada</p>
+            <p id="foodInfoText"></p>
         </div>
     </div>
 
@@ -328,7 +341,7 @@
         #comidas{
             width: 100%;
             height: 100%;
-            margin-top: 20%;
+            margin-top: 0%;
             margin-bottom: 30%;
         }
         .comida{
@@ -545,6 +558,38 @@
         }
         #trianglin{
             width: 15%;
+        }
+        #ingressos{
+            width: 100%;
+            height: 100%;
+            margin-top: 27%;
+            margin-bottom: 10%;
+            display: flex;
+        }
+        #ingresso{
+            background-color: #fffcdc;
+            border: 5% #fffcdc solid;
+            border-radius: 10%;
+            width: 97%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        #buyTicket{
+            background-color: #f7d19e;
+            border: #f7d19e solid 1px;
+            border-radius: 20px;
+            width: 36%;
+            margin-top: 5%;
+        }
+        #buyTicket:hover{
+            background-color: #a1855f;
+            border: #a1855f;
+        }
+        #ticketImg{
+            width: 90%;
+        }
+        #divInfoIngresso{
+            text-align: center;
         }
         @keyframes tela13{
             from {opacity: 100%;border-bottom: black solid 0px;}

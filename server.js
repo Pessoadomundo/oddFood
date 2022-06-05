@@ -1,13 +1,3 @@
-/*const _pix = require('faz-um-pix');
-
-const code = _pix.Pix("+5531988088186", "Gabriel Jota Lizardo", "Belo Horizonte", "10", "Penis");
-
-const qrcode = _pix.Pix("+5531988088186", "Gabriel Jota Lizardo", "Belo Horizonte", "10", "Penis", true);
-
-
-console.log(code)
-console.log(qrcode)
-*/
 var express = require('express')
 var fs = require("fs")
 var app = express();
@@ -25,6 +15,28 @@ var users = JSON.parse(rawdata)
 const foods = [{"name": "Parmegiana (Pequeno)", "preco":20, "id":0, "img": "5.jpg"}, {"name": "Parmegiana (Grande)", "preco":22, "id":1, "img": "6.jpg"}, {"name": "Strogonoff (Pequeno)", "preco":20, "id":2, "img": "3.png"}, {"name": "Strogonoff (Grande)", "preco":22, "id":3, "img": "3_5.jpg"}, {"name": "Almôndegas (Pequeno)", "preco":20, "id":4, "img": "1.jpg"}, {"name": "Almôndegas (Grande)", "preco":22, "id":5, "img": "2.jpg"}, {"name": "Feijoada (Pequeno)", "preco":20, "id":6, "img": "7.jpeg"}, {"name": "Feijoada (Grande)", "preco":22, "id":7, "img": "8.jpg"}, {"name": "Alcatra (Pequeno)", "preco":31, "id":8, "img": "9.webp"}, {"name": "Alcatra (Grande)", "preco":34, "id":9, "img": "10.jpg"}, {"name": "Chorizo (Pequeno)", "preco":35, "id":10, "img": "11.jpg"}, {"name": "Chorizo (Grande)", "preco":39, "id":11, "img": "12.jpg"}, {"name": "Filé Mignon (Pequeno)", "preco":41, "id":12, "img": "13.webp"}, {"name": "Filé Migon (Grande)", "preco":44, "id":13, "img": "14.webp"}, {"name": "Frango (Pequeno)", "preco":22, "id":14, "img": "15.jpg"}, {"name": "Frango (Grande)", "preco":24, "id":15, "img": "16.jpg"}, {"name": "Hambúrger Vegano (Pequeno)", "preco":31, "id":16, "img": "17.jpg"}, {"name": "Hambúrguer Vegano (Grande)", "preco":34, "id":17, "img": "18.jpeg"}, {"name": "Lombo (Pequeno)", "preco":22, "id":18, "img": "19.jpg"}, {"name": "Lombo (Grande)", "preco":24, "id":19, "img": "19_5.jpg"}, {"name": "Omelete (Pequeno)", "preco":22, "id":20, "img": "20.jpeg"}, {"name": "Omelete (Grande)", "preco":24, "id":21, "img": "21.webp"}, {"name": "Picanha (Pequeno)", "preco":41, "id":22, "img": "22.jpg"}, {"name": "Picanha (Grande)", "preco":44, "id":23, "img": "22_5.jpg"}, {"name": "Tilápia (Pequeno)", "preco":31, "id":24, "img": "23.webp"}, {"name": "Tilápia (Grande)", "preco":34, "id":25, "img": "24.jpg"}, {"name": "Fritas (400g)", "preco":25, "id":26, "img": "29.jpg"}, {"name": "Fritas com Bacon e Queijo (400g)", "preco":35, "id":27, "img": "30.jpg"}, {"name": "Bolinhos de Bacalhau (15)", "preco":34, "id":28, "img": "31.jpg"}, {"name": "Prato Kids", "preco":22, "id":29, "img": "25.webp"}, {"name": "Coca Cola Lata", "preco":6, "id":30, "img": "b1.png"}, {"name": "Coca Cola Zero Lata", "preco":6, "id":31, "img": "b2.png"}, {"name": "Suco de Uva (330ml)", "preco":6, "id":32, "img": "b3.png"}, {"name": "Suco de Pêssego (330ml)", "preco":6, "id":33, "img": "b4.png"}, {"name": "Suco de Manga (330ml)", "preco":6, "id":34, "img": "b5.png"}, {"name": "Água Natural", "preco":4, "id":35, "img": "b6.png"}, {"name": "Água com Gás", "preco":4, "id":36, "img": "b7.png"}, {"name": "H2OH!", "preco":6, "id":37, "img": "b8.png"}, {"name": "Bombom Sonho de Valsa", "preco":3, "id":38, "img": "c1.png"}, {"name": "Bombom Ouro Branco", "preco":3, "id":39, "img": "c2.png"}, {"name": "Brownie", "preco":7, "id":40, "img": "c3.jpg"}, {"name": "Chocolate 5 Star", "preco":5, "id":41, "img": "c4.png"}, {"name": "Chocolate Laka Branco", "preco":4, "id":42, "img": "c5.png"}, {"name": "Chocolate Diamante Negro", "preco":4, "id":43, "img": "c6.png"}, {"name": "Halls Extra Forte", "preco":3, "id":44, "img": "c7.png"}, {"name": "Halls de Morango", "preco":3, "id":45, "img": "c8.png"}, {"name": "Trident de Hortelã", "preco":3, "id":46, "img": "c9.png"}, {"name": "Trident de Morango", "preco":3, "id":47, "img": "c10.png"}]
 let orders = [{"nome":"Parmegiana (Pequeno)", "qtd": 0}, {"nome":"Parmegiana (Grande)", "qtd": 0}, {"nome":"Strogonoff (Pequeno)", "qtd": 0}, {"nome":"Strogonoff (Grande)", "qtd": 0}, {"nome":"Almôndegas (Pequeno)", "qtd": 0}, {"nome":"Almôndegas (Grande)", "qtd": 0}, {"nome":"Feijoada (Pequeno)", "qtd": 0}, {"nome":"Feijoada (Grande)", "qtd": 0}, {"nome":"Alcatra (Pequeno)", "qtd": 0}, {"nome":"Alcatra (Grande)", "qtd": 0}, {"nome":"Chorizo (Pequeno)", "qtd": 0}, {"nome":"Chorizo (Grande)", "qtd": 0}, {"nome":"Filé Mignon (Pequeno)", "qtd": 0}, {"nome":"Filé Mignon (Grande)", "qtd": 0}, {"nome":"Frango (Pequeno)", "qtd": 0}, {"nome":"Frango (Grande)", "qtd": 0}, {"nome":"Hambúger Vegano (Pequeno)", "qtd": 0}, {"nome":"Hambúrger Vegano (Grande)", "qtd": 0}, {"nome":"Lombo (Pequeno)", "qtd": 0}, {"nome":"Lombo (Grande)", "qtd": 0}, {"nome":"Omelete (Pequeno)", "qtd": 0}, {"nome":"Omelete (Grande)", "qtd": 0}, {"nome":"Picanha (Pequeno)", "qtd": 0}, {"nome":"Picanha (Grande)", "qtd": 0}, {"nome":"Tilápia (Pequeno)", "qtd": 0}, {"nome":"Tilápia (Grande)", "qtd": 0}, {"nome":"Fritas (400g)", "qtd": 0}, {"nome":"Fritas com Bacon e Queijo (400g)", "qtd": 0}, {"nome":"Bolinhos de Bacalhau (15)", "qtd": 0}, {"nome":"Prato Kids", "qtd": 0}, {"nome":"Coca Cola Lata", "qtd": 0}, {"nome":"Coca Cola Zero Lata", "qtd": 0}, {"nome":"Suco de Uva (330ml)", "qtd": 0}, {"nome":"Suco de Pêssego (330ml)", "qtd": 0}, {"nome":"Suco de Manga (330ml)", "qtd": 0}, {"nome":"Água Natural", "qtd": 0}, {"nome":"Água com Gás", "qtd": 0}, {"nome":"H2OH!", "qtd": 0}, {"nome":"Bombom Sonho de Valsa", "qtd": 0}, {"nome":"Bombom Ouro Branco", "qtd": 0}, {"nome":"Brownie", "qtd": 0}, {"nome":"Chocolate 5 Star", "qtd": 0}, {"nome":"Chocolate Laka Branco", "qtd": 0}, {"nome":"Chocolate Diamante Negro", "qtd": 0}, {"nome":"Halls Extra Forte", "qtd": 0}, {"nome":"Halls de Morango", "qtd": 0}, {"nome":"Trident de Hortelã", "qtd": 0}, {"nome":"Trident de Morango", "qtd": 0}]
 let day = 0
+
+var precoIngresso = 48
+var lote = 1
+var ingressosComprados = 0
+var listaPessoasIngressos = JSON.parse(fs.readFileSync('ingressos.json'))
+ingressosComprados = listaPessoasIngressos.length
+var aindaVendendo = true
+
+if(ingressosComprados<=49){
+  precoIngresso = 48
+  lote = 1
+}else if(ingressosComprados>=50 && ingressosComprados<98){
+  precoIngresso = 58
+  lote = 2
+}else if(ingressosComprados>=98 && ingressosComprados<=128){
+  precoIngresso = 63
+  lote = 3
+}else{
+  precoIngresso = 999
+  lote = 999
+  aindaVendendo = false
+}
 
 let lastActions = []
 
@@ -169,6 +181,27 @@ app.get('/finalOrder', function (req, res){
   res.end()
 })
 
+app.get('/ingressos', function (req, res){
+  listaPessoasIngressos = JSON.parse(fs.readFileSync('ingressos.json'))
+  res.write("Lista de pessoas:\n")
+  listaPessoasIngressos.forEach(pessoa=>{
+    res.write(pessoa+"\n")
+  })
+  res.write("\n\n\n")
+  res.write("Total de Ingressos: "+ingressosComprados)
+  let valorTotal = 0
+  valorTotal+=ingressosComprados*48
+  if(ingressosComprados>50){
+    valorTotal+=(ingressosComprados-50)*10
+  }
+  if(ingressosComprados>98){
+    valorTotal+=(ingressosComprados-98)*5
+  }
+  let valorAPagar = valorTotal-3*ingressosComprados
+  res.write("\n\nValor recebido: "+valorTotal)
+  res.write("\n\nValor a pagar pra comissao: "+valorAPagar)
+  res.end()
+})
 
 server.listen(80)
 
@@ -331,5 +364,66 @@ io.on('connection', socket => {
         lastActions.unshift(infoType+" do usuário de ID "+userid+" foi alterado/a para "+ info)
       }
     }
+  })
+  socket.on("payTicketAsk", userid=>{
+    if(ingressosComprados<=49){
+      precoIngresso = 48
+      lote = 1
+    }else if(ingressosComprados>=50 && ingressosComprados<98){
+      precoIngresso = 58
+      lote = 2
+    }else if(ingressosComprados>=98 && ingressosComprados<=128){
+      precoIngresso = 63
+      lote = 3
+    }else{
+      precoIngresso = 999
+      lote = 999
+      aindaVendendo = false
+    }
+    if(users[getUserIndex(userid)].saldo>precoIngresso){
+      ingressosComprados+=1
+      users[getUserIndex(userid)].saldo -= precoIngresso
+      users[getUserIndex(userid)].hasTicket = true
+      io.to(id).emit("ticketAnswer", true)
+      listaPessoasIngressos.push(users[getUserIndex(userid)].email)
+      fs.writeFile('users.json', JSON.stringify(users), (err) => {})
+      fs.writeFile('ingressos.json', JSON.stringify(listaPessoasIngressos), (err) => {})
+      lastActions.unshift("Ingresso comprado por "+users[getUserIndex(userid)].email)
+    }else{
+      io.to(id).emit("ticketAnswer", false)
+    }
+  
+    if(ingressosComprados<=49){
+      precoIngresso = 48
+      lote = 1
+    }else if(ingressosComprados>=50 && ingressosComprados<98){
+      precoIngresso = 58 
+      lote = 2
+    }else if(ingressosComprados>=98 && ingressosComprados<=128){
+      precoIngresso = 63
+      lote = 3
+    }else{
+      precoIngresso = 999
+      lote = 999
+      aindaVendendo = false
+    }
+  })
+  socket.on("getTicketPrice", a=>{
+    if(ingressosComprados<=49){
+      precoIngresso = 48
+      lote = 1
+    }else if(ingressosComprados>=50 && ingressosComprados<98){
+      precoIngresso = 58
+      lote = 2
+    }else if(ingressosComprados>=98 && ingressosComprados<=128){
+      precoIngresso = 63
+      lote = 3
+    }else{
+      precoIngresso = 999
+      lote = 999
+      aindaVendendo = false
+    }
+    let ticketResp = {"precoIngresso": precoIngresso, "lote": lote}
+    socket.emit("ticketPriceAnswer", ticketResp)
   })
 })

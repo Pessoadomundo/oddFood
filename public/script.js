@@ -57,6 +57,12 @@ let tuText = document.getElementById("tuText")
 let sauce = document.getElementById("sauce")
 let sendingDay = document.getElementById("sendingDay")
 
+let divIngressos = document.getElementById("ingressos")
+let buyTicket = document.getElementById("buyTicket")
+
+var precoIngresso = 48
+var lote = 1
+
 let mode = 1
 
 let tuTela = 0
@@ -68,7 +74,7 @@ let days = ["Terça (12:25)", "Quarta (11:35)", "Quinta (12:25)", "Sexta (11:35)
 
 
 socket.emit("getDay", true)
-
+socket.emit("getTicketPrice")
 
 function changePage(page){
     if(page==1){
@@ -295,7 +301,7 @@ function displayBalance(){
     }
 }
 
-function displayAlert(message, good){
+function displayAlert(message, good=true){
     notificationDiv.children[0].innerHTML = message
     notificationDiv.style.display = "block"
     if(good){
@@ -416,6 +422,21 @@ document.getElementsByTagName('body')[0].onscroll = () => {
     document.getElementById("foodInfoDiv").style.display="none"
 }
 
+buyTicket.addEventListener("click", ()=>{
+    if(lote!=999){
+        let confimation = confirm("Você tem certeza que deseja usar R$"+precoIngresso+",00 para comprar o ingresso?")
+        if(confimation && user.hasTicket!=true){
+            socket.emit("payTicketAsk", user.id)
+        }else if(user.hasTicket==true){
+            displayAlert("Você já adquiriu este ingresso", false)
+        }else{
+            displayAlert("Compra cancelada", false)
+        }
+    }else{
+        displayAlert("Vendas encerradas", false)
+    }
+})
+
 socket.on("loginState", data=>{
     if(data.state == "Success"){
         user = data.userInfo
@@ -428,6 +449,9 @@ socket.on("loginState", data=>{
             changePage(2)
             tela2.style.animation= "animation2 1s";
         }, 2000)
+        if(user.hasTicket){
+            document.getElementById("buyTicket").style.backgroundColor = "#61e03a"
+        }
     }else if(data.state == "Fail"){
         result.innerText = "Usuário e/ou senha incorretos"
     }
@@ -473,9 +497,38 @@ socket.on("day", dia=>{
     sendingDay.innerText = "Entrega: " + days[day]
 })
 
+socket.on("ticketAnswer", confirmation =>{
+    if(confirmation){
+        displayAlert("Ingresso comprado com sucesso!")
+        user.saldo-=precoIngresso
+        socket.emit("askUser", user.id)
+        setTimeout(()=>{
+            displayBalance()
+        },500)
+    }else{
+        displayAlert("Saldo insuficiente", false)
+    }
+})
+
+socket.on("ticketPriceAnswer", data=>{
+    precoIngresso = data.precoIngresso
+    lote = data.lote
+    document.getElementById("precoIngresso").innerHTML = "R$"+precoIngresso+",00"
+    document.getElementById("nomeIngresso").innerHTML = "Ingresso Pós Festa Junina <br>("+lote+"º Lote)"
+    if(lote==999){
+        document.getElementById("precoIngresso").innerHTML = "Vendas encerradas"
+        document.getElementById("nomeIngresso").innerHTML = "Ingresso Pós Festa Junina"
+        document.getElementById("buyTicket").style.backgroundColor = "#c42421"
+    }
+})
+
 async function a(){
     setInterval(()=>{
         socket.emit("askUser", user.id)
+        socket.emit("getTicketPrice")
+        if(user.hasTicket){
+            document.getElementById("buyTicket").style.backgroundColor = "#61e03a"
+        }
         displayBalance()
         updateCart()
     },10000)
