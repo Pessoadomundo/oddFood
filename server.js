@@ -16,21 +16,21 @@ const foods = [{"name": "Parmegiana (Pequeno)", "preco":20, "id":0, "img": "5.jp
 let orders = [{"nome":"Parmegiana (Pequeno)", "qtd": 0}, {"nome":"Parmegiana (Grande)", "qtd": 0}, {"nome":"Strogonoff (Pequeno)", "qtd": 0}, {"nome":"Strogonoff (Grande)", "qtd": 0}, {"nome":"Almôndegas (Pequeno)", "qtd": 0}, {"nome":"Almôndegas (Grande)", "qtd": 0}, {"nome":"Feijoada (Pequeno)", "qtd": 0}, {"nome":"Feijoada (Grande)", "qtd": 0}, {"nome":"Alcatra (Pequeno)", "qtd": 0}, {"nome":"Alcatra (Grande)", "qtd": 0}, {"nome":"Chorizo (Pequeno)", "qtd": 0}, {"nome":"Chorizo (Grande)", "qtd": 0}, {"nome":"Filé Mignon (Pequeno)", "qtd": 0}, {"nome":"Filé Mignon (Grande)", "qtd": 0}, {"nome":"Frango (Pequeno)", "qtd": 0}, {"nome":"Frango (Grande)", "qtd": 0}, {"nome":"Hambúger Vegano (Pequeno)", "qtd": 0}, {"nome":"Hambúrger Vegano (Grande)", "qtd": 0}, {"nome":"Lombo (Pequeno)", "qtd": 0}, {"nome":"Lombo (Grande)", "qtd": 0}, {"nome":"Omelete (Pequeno)", "qtd": 0}, {"nome":"Omelete (Grande)", "qtd": 0}, {"nome":"Picanha (Pequeno)", "qtd": 0}, {"nome":"Picanha (Grande)", "qtd": 0}, {"nome":"Tilápia (Pequeno)", "qtd": 0}, {"nome":"Tilápia (Grande)", "qtd": 0}, {"nome":"Fritas (400g)", "qtd": 0}, {"nome":"Fritas com Bacon e Queijo (400g)", "qtd": 0}, {"nome":"Bolinhos de Bacalhau (15)", "qtd": 0}, {"nome":"Prato Kids", "qtd": 0}, {"nome":"Coca Cola Lata", "qtd": 0}, {"nome":"Coca Cola Zero Lata", "qtd": 0}, {"nome":"Suco de Uva (330ml)", "qtd": 0}, {"nome":"Suco de Pêssego (330ml)", "qtd": 0}, {"nome":"Suco de Manga (330ml)", "qtd": 0}, {"nome":"Água Natural", "qtd": 0}, {"nome":"Água com Gás", "qtd": 0}, {"nome":"H2OH!", "qtd": 0}, {"nome":"Bombom Sonho de Valsa", "qtd": 0}, {"nome":"Bombom Ouro Branco", "qtd": 0}, {"nome":"Brownie", "qtd": 0}, {"nome":"Chocolate 5 Star", "qtd": 0}, {"nome":"Chocolate Laka Branco", "qtd": 0}, {"nome":"Chocolate Diamante Negro", "qtd": 0}, {"nome":"Halls Extra Forte", "qtd": 0}, {"nome":"Halls de Morango", "qtd": 0}, {"nome":"Trident de Hortelã", "qtd": 0}, {"nome":"Trident de Morango", "qtd": 0}]
 let day = 0
 
-var precoIngresso = 48
+var precoIngresso = 80
 var lote = 1
 var ingressosComprados = 0
 var listaPessoasIngressos = JSON.parse(fs.readFileSync('ingressos.json'))
 ingressosComprados = listaPessoasIngressos.length
 var aindaVendendo = true
 
-if(ingressosComprados<=49){
-  precoIngresso = 48
+if(ingressosComprados<=29){
+  precoIngresso = 80
   lote = 1
-}else if(ingressosComprados>=50 && ingressosComprados<98){
-  precoIngresso = 58
+}else if(ingressosComprados>=30 && ingressosComprados<69){
+  precoIngresso = 95
   lote = 2
-}else if(ingressosComprados>=98 && ingressosComprados<=128){
-  precoIngresso = 63
+}else if(ingressosComprados>=70 && ingressosComprados<=99){
+  precoIngresso = 110
   lote = 3
 }else{
   precoIngresso = 999
@@ -190,16 +190,16 @@ app.get('/ingressos', function (req, res){
   res.write("\n\n\n")
   res.write("Total de Ingressos: "+ingressosComprados)
   let valorTotal = 0
-  valorTotal+=ingressosComprados*48
-  if(ingressosComprados>50){
-    valorTotal+=(ingressosComprados-50)*10
+  valorTotal+=ingressosComprados*80
+  if(ingressosComprados>30){
+    valorTotal+=(ingressosComprados-30)*15
   }
-  if(ingressosComprados>98){
-    valorTotal+=(ingressosComprados-98)*5
+  if(ingressosComprados>70){
+    valorTotal+=(ingressosComprados-70)*15
   }
-  let valorAPagar = valorTotal-3*ingressosComprados
+  //let valorAPagar = valorTotal-3*ingressosComprados
   res.write("\n\nValor recebido: "+valorTotal)
-  res.write("\n\nValor a pagar pra comissao: "+valorAPagar)
+  //res.write("\n\nValor a pagar pra comissao: "+valorAPagar)
   res.end()
 })
 
@@ -366,14 +366,14 @@ io.on('connection', socket => {
     }
   })
   socket.on("payTicketAsk", userid=>{
-    if(ingressosComprados<=49){
-      precoIngresso = 48
+    if(ingressosComprados<=29){
+      precoIngresso = 80
       lote = 1
-    }else if(ingressosComprados>=50 && ingressosComprados<98){
-      precoIngresso = 58
+    }else if(ingressosComprados>=30 && ingressosComprados<69){
+      precoIngresso = 95
       lote = 2
-    }else if(ingressosComprados>=98 && ingressosComprados<=128){
-      precoIngresso = 63
+    }else if(ingressosComprados>=70 && ingressosComprados<=99){
+      precoIngresso = 110
       lote = 3
     }else{
       precoIngresso = 999
@@ -393,14 +393,14 @@ io.on('connection', socket => {
       io.to(id).emit("ticketAnswer", false)
     }
   
-    if(ingressosComprados<=49){
-      precoIngresso = 48
+    if(ingressosComprados<=29){
+      precoIngresso = 80
       lote = 1
-    }else if(ingressosComprados>=50 && ingressosComprados<98){
-      precoIngresso = 58 
+    }else if(ingressosComprados>=30 && ingressosComprados<69){
+      precoIngresso = 95
       lote = 2
-    }else if(ingressosComprados>=98 && ingressosComprados<=128){
-      precoIngresso = 63
+    }else if(ingressosComprados>=70 && ingressosComprados<=99){
+      precoIngresso = 110
       lote = 3
     }else{
       precoIngresso = 999
@@ -409,14 +409,14 @@ io.on('connection', socket => {
     }
   })
   socket.on("getTicketPrice", a=>{
-    if(ingressosComprados<=49){
-      precoIngresso = 48
+    if(ingressosComprados<=29){
+      precoIngresso = 80
       lote = 1
-    }else if(ingressosComprados>=50 && ingressosComprados<98){
-      precoIngresso = 58
+    }else if(ingressosComprados>=30 && ingressosComprados<69){
+      precoIngresso = 95
       lote = 2
-    }else if(ingressosComprados>=98 && ingressosComprados<=128){
-      precoIngresso = 63
+    }else if(ingressosComprados>=70 && ingressosComprados<=99){
+      precoIngresso = 110
       lote = 3
     }else{
       precoIngresso = 999

@@ -60,7 +60,7 @@ let sendingDay = document.getElementById("sendingDay")
 let divIngressos = document.getElementById("ingressos")
 let buyTicket = document.getElementById("buyTicket")
 
-var precoIngresso = 48
+var precoIngresso = 80
 var lote = 1
 
 let mode = 1
@@ -514,10 +514,10 @@ socket.on("ticketPriceAnswer", data=>{
     precoIngresso = data.precoIngresso
     lote = data.lote
     document.getElementById("precoIngresso").innerHTML = "R$"+precoIngresso+",00"
-    document.getElementById("nomeIngresso").innerHTML = "Ingresso Pós Festa Junina <br>("+lote+"º Lote)"
+    document.getElementById("nomeIngresso").innerHTML = "OddParty Junina <br>("+lote+"º Lote)"
     if(lote==999){
         document.getElementById("precoIngresso").innerHTML = "Vendas encerradas"
-        document.getElementById("nomeIngresso").innerHTML = "Ingresso Pós Festa Junina"
+        document.getElementById("nomeIngresso").innerHTML = "OddParty Junina"
         document.getElementById("buyTicket").style.backgroundColor = "#c42421"
     }
 })
