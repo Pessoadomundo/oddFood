@@ -30,7 +30,7 @@ if(ingressosComprados<=29){
   precoIngresso = 95
   lote = 2
 }else if(ingressosComprados>=70 && ingressosComprados<=99){
-  precoIngresso = 110
+  precoIngresso = 100
   lote = 3
 }else{
   precoIngresso = 999
@@ -373,7 +373,7 @@ io.on('connection', socket => {
       precoIngresso = 95
       lote = 2
     }else if(ingressosComprados>=70 && ingressosComprados<=99){
-      precoIngresso = 110
+      precoIngresso = 100
       lote = 3
     }else{
       precoIngresso = 999
@@ -400,7 +400,7 @@ io.on('connection', socket => {
       precoIngresso = 95
       lote = 2
     }else if(ingressosComprados>=70 && ingressosComprados<=99){
-      precoIngresso = 110
+      precoIngresso = 100
       lote = 3
     }else{
       precoIngresso = 999
@@ -416,7 +416,7 @@ io.on('connection', socket => {
       precoIngresso = 95
       lote = 2
     }else if(ingressosComprados>=70 && ingressosComprados<=99){
-      precoIngresso = 110
+      precoIngresso = 100
       lote = 3
     }else{
       precoIngresso = 999
