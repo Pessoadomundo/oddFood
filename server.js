@@ -194,9 +194,6 @@ app.get('/ingressos', function (req, res){
   if(ingressosComprados>30){
     valorTotal+=(ingressosComprados-30)*15
   }
-  if(ingressosComprados>70){
-    valorTotal+=(ingressosComprados-70)*15
-  }
   //let valorAPagar = valorTotal-3*ingressosComprados
   res.write("\n\nValor recebido: "+valorTotal)
   //res.write("\n\nValor a pagar pra comissao: "+valorAPagar)
@@ -371,9 +368,9 @@ io.on('connection', socket => {
       lote = 1
     }else if(ingressosComprados>=30 && ingressosComprados<69){
       precoIngresso = 95
-      lote = 2
+      lote = 3
     }else if(ingressosComprados>=70 && ingressosComprados<=99){
-      precoIngresso = 100
+      precoIngresso = 95
       lote = 3
     }else{
       precoIngresso = 999
@@ -398,7 +395,7 @@ io.on('connection', socket => {
       lote = 1
     }else if(ingressosComprados>=30 && ingressosComprados<69){
       precoIngresso = 95
-      lote = 2
+      lote = 3
     }else if(ingressosComprados>=70 && ingressosComprados<=99){
       precoIngresso = 100
       lote = 3
@@ -414,7 +411,7 @@ io.on('connection', socket => {
       lote = 1
     }else if(ingressosComprados>=30 && ingressosComprados<69){
       precoIngresso = 95
-      lote = 2
+      lote = 3
     }else if(ingressosComprados>=70 && ingressosComprados<=99){
       precoIngresso = 100
       lote = 3
