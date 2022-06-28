@@ -26,7 +26,7 @@ var aindaVendendo = true
 if(ingressosComprados<=29){
   precoIngresso = 80
   lote = 1
-}else if(ingressosComprados>=30 && ingressosComprados<69){
+}else if(ingressosComprados>=30 && ingressosComprados<=69){
   precoIngresso = 95
   lote = 2
 }else if(ingressosComprados>=70 && ingressosComprados<=99){
@@ -366,7 +366,7 @@ io.on('connection', socket => {
     if(ingressosComprados<=29){
       precoIngresso = 80
       lote = 1
-    }else if(ingressosComprados>=30 && ingressosComprados<69){
+    }else if(ingressosComprados>=30 && ingressosComprados<=69){
       precoIngresso = 95
       lote = 3
     }else if(ingressosComprados>=70 && ingressosComprados<=99){
@@ -393,7 +393,7 @@ io.on('connection', socket => {
     if(ingressosComprados<=29){
       precoIngresso = 80
       lote = 1
-    }else if(ingressosComprados>=30 && ingressosComprados<69){
+    }else if(ingressosComprados>=30 && ingressosComprados<=69){
       precoIngresso = 95
       lote = 3
     }else if(ingressosComprados>=70 && ingressosComprados<=99){
@@ -409,7 +409,7 @@ io.on('connection', socket => {
     if(ingressosComprados<=29){
       precoIngresso = 80
       lote = 1
-    }else if(ingressosComprados>=30 && ingressosComprados<69){
+    }else if(ingressosComprados>=30 && ingressosComprados<=69){
       precoIngresso = 95
       lote = 3
     }else if(ingressosComprados>=70 && ingressosComprados<=99){
