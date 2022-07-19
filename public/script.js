@@ -423,6 +423,7 @@ document.getElementsByTagName('body')[0].onscroll = () => {
     document.getElementById("foodInfoDiv").style.display="none"
 }
 
+/* TICKET
 buyTicket.addEventListener("click", ()=>{
     if(lote!=999){
         let confimation = confirm("Você tem certeza que deseja usar R$"+precoIngresso+",00 para comprar o ingresso?")
@@ -437,6 +438,7 @@ buyTicket.addEventListener("click", ()=>{
         displayAlert("Vendas encerradas", false)
     }
 })
+*/
 
 socket.on("loginState", data=>{
     if(data.state == "Success"){
@@ -450,6 +452,7 @@ socket.on("loginState", data=>{
             changePage(2)
             tela2.style.animation= "animation2 1s";
         }, 2000)
+        
         if(user.hasTicket){
             document.getElementById("buyTicket").style.backgroundColor = "#61e03a"
         }
