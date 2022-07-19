@@ -57,8 +57,9 @@ let tuText = document.getElementById("tuText")
 let sauce = document.getElementById("sauce")
 let sendingDay = document.getElementById("sendingDay")
 
-let divIngressos = document.getElementById("ingressos")
-let buyTicket = document.getElementById("buyTicket")
+//TICKET
+/////let divIngressos = document.getElementById("ingressos")
+/////let buyTicket = document.getElementById("buyTicket")
 
 var precoIngresso = 80
 var lote = 1
@@ -497,6 +498,7 @@ socket.on("day", dia=>{
     sendingDay.innerText = "Entrega: " + days[day]
 })
 
+/* TICKET
 socket.on("ticketAnswer", confirmation =>{
     if(confirmation){
         displayAlert("Ingresso comprado com sucesso!")
@@ -521,7 +523,7 @@ socket.on("ticketPriceAnswer", data=>{
         document.getElementById("buyTicket").style.backgroundColor = "#c42421"
     }
 })
-
+*/
 async function a(){
     setInterval(()=>{
         socket.emit("askUser", user.id)
