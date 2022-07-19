@@ -452,10 +452,11 @@ socket.on("loginState", data=>{
             changePage(2)
             tela2.style.animation= "animation2 1s";
         }, 2000)
-        
+        /*TICKET
         if(user.hasTicket){
             document.getElementById("buyTicket").style.backgroundColor = "#61e03a"
         }
+        */
     }else if(data.state == "Fail"){
         result.innerText = "Usuário e/ou senha incorretos"
     }
@@ -530,10 +531,12 @@ socket.on("ticketPriceAnswer", data=>{
 async function a(){
     setInterval(()=>{
         socket.emit("askUser", user.id)
+        /*TICKET
         socket.emit("getTicketPrice")
         if(user.hasTicket){
             document.getElementById("buyTicket").style.backgroundColor = "#61e03a"
         }
+        */
         displayBalance()
         updateCart()
     },10000)
