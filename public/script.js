@@ -866,6 +866,7 @@ document.getElementById("plusMarketplaceButton").addEventListener("click", ()=>{
 document.getElementById("backArrowMP").addEventListener("click", ()=>{
     document.getElementById("backArrowMP").style.animation="enlarge2 1s"
     document.getElementById("tela4content").style.animation="fade 1s"
+    document.getElementsByTagName("body")[0].style.backgroundColor="white"
     setTimeout(()=>{
         document.getElementById("tela4").style.display="none"
         document.getElementById("tela2").style.display="block"
