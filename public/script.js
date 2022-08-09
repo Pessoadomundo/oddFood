@@ -851,6 +851,7 @@ document.getElementById("marketplaceEntireScreen").addEventListener("click", ()=
 
 document.getElementById("plusMarketplaceButton").addEventListener("click", ()=>{
     document.getElementById("plusMarketplaceButton").style.animation= "enlarge 1s"
+    document.getElementsByTagName("body")[0].style.backgroundColor="black"
     document.getElementById("daBarra").style.animation= "fade 1s"
     setTimeout(()=>{
         document.getElementById("plusMarketplaceButton").style.animation= "none"
