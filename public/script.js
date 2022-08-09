@@ -61,6 +61,10 @@ let sendingDay = document.getElementById("sendingDay")
 /////let divIngressos = document.getElementById("ingressos")
 /////let buyTicket = document.getElementById("buyTicket")
 
+var clickedInsideMarketplaceProduct = false
+
+var products = []
+
 var precoIngresso = 80
 var lote = 1
 
@@ -297,8 +301,372 @@ function displayFood(id, type, elt, qtd=0){
 function displayBalance(){
     if(Number.isInteger(user.saldo)){
         saldo.innerHTML = "Saldo: R$"+user.saldo+",00"
+        saldoMarketplace.innerHTML = "Saldo: R$"+user.saldo+",00"
     }else{
         saldo.innerHTML = "Saldo: R$"+user.saldo
+        saldoMarketplace.innerHTML = "Saldo: R$"+user.saldo
+    }
+}
+
+function displayMarketplaceProduct(id, name, imagem, desc, preco){
+    let eltProduct = document.createElement("div")
+    eltProduct.classList.add("marketplaceProduct")
+    let imgProduct = document.createElement("img")
+    imgProduct.src = imagem
+    imgProduct.classList.add("imgProduct")
+    eltProduct.appendChild(imgProduct)
+    let productInfo = document.createElement("div")
+    productInfo.classList.add("productInfo")
+    let nomeComida = document.createElement("span")
+    nomeComida.classList.add("nomeComida")
+    nomeComida.innerHTML = name
+    productInfo.appendChild(nomeComida)
+    let precoComida = document.createElement("span")
+    precoComida.classList.add("preco")
+    precoComida.innerHTML = "R$"+preco+",00"
+    productInfo.appendChild(precoComida)
+    productInfo.appendChild(document.createElement("br"))
+    eltProduct.appendChild(productInfo)
+
+    let columnToAdd = 1
+    if(document.getElementById("marketplaceColumn1").children.length>document.getElementById("marketplaceColumn2").children.length){
+        columnToAdd = 2
+    }
+    if(columnToAdd==1){
+        document.getElementById("marketplaceColumn1").appendChild(eltProduct)
+    }else if(columnToAdd==2){
+        document.getElementById("marketplaceColumn2").appendChild(eltProduct)
+    }
+
+    eltProduct.addEventListener("click", ()=>{
+        displayMarketplaceProductLook(id, name, imagem, desc, preco)
+        document.getElementById("marketplaceEntireScreen").style.display = "block"
+    })
+}
+
+function putArrayInScoreOrder(array){
+    let newArray = []
+    for(let i=0; i<array.length; i++){
+        newArray.push(array[i])
+    }
+    for(let i=0; i<newArray.length; i++){
+        for(let j=i+1; j<newArray.length; j++){
+            if(newArray[i].vendas<newArray[j].vendas){
+                let aux = newArray[i]
+                newArray[i] = newArray[j]
+                newArray[j] = aux
+            }
+        }
+    }
+    return newArray
+}
+
+function invertArray(array){
+    let newArray = []
+    for(let i=array.length-1; i>=0; i--){
+        newArray.push(array[i])
+    }
+    return newArray
+}
+    
+
+
+function displayMarketplaceProducts(){
+    document.getElementById("marketplaceColumn1").innerHTML = ""
+    document.getElementById("marketplaceColumn2").innerHTML = ""
+    let productsInOrder = putArrayInScoreOrder(products)
+
+    for(let i=0; i<productsInOrder.length; i++){
+        if(!(productsInOrder[i].definedStock==true && productsInOrder[i].stock<=0)){
+            displayMarketplaceProduct(productsInOrder[i].id, productsInOrder[i].name, productsInOrder[i].imagem, productsInOrder[i].desc, productsInOrder[i].preco)
+        }
+    }
+}
+
+function displayMarketplaceProductLook(id, name, imagem, desc, preco){
+    document.getElementById("marketplaceProductImgLook").src = imagem
+    document.getElementById("marketplaceProductNameLook").innerHTML = name
+    document.getElementById("marketplaceProductDescriptionLook").innerHTML = desc
+    document.getElementById("marketplaceProductPriceLook").innerHTML = "R$"+preco+",00"
+
+    var new_element = document.getElementById("marketplaceProductBuyLook").cloneNode(true)
+    document.getElementById("marketplaceProductBuyLook").parentNode.replaceChild(new_element, document.getElementById("marketplaceProductBuyLook"))
+
+    document.getElementById("marketplaceProductBuyLook").addEventListener("click", ()=>{
+        let confimation = confirm("Você tem certeza que deseja comprar este produto?")
+            if(confimation){
+                socket.emit("buyMarketplaceProductAsk", user.id, id, document.getElementById("marketplaceProductObservationsLook").value)
+            }
+            document.getElementById("marketplaceEntireScreen").style.display="none"
+    })
+}
+
+
+function putRecentItemMP(name, imagem, preco){
+    let eltRecentItem = document.createElement("div")
+    eltRecentItem.classList.add("recentItem")
+    let imgRecentItem = document.createElement("img")
+    imgRecentItem.src = imagem
+    imgRecentItem.classList.add("imgComida")
+    let imgRecentItemDiv = document.createElement("div")
+    imgRecentItemDiv.classList.add("divImgComida")
+    imgRecentItemDiv.appendChild(imgRecentItem)
+    eltRecentItem.appendChild(imgRecentItemDiv)
+    let recentItemInfo = document.createElement("div")
+    recentItemInfo.classList.add("productInfo")
+    let nome = document.createElement("span")
+    nome.classList.add("nomeComida")
+    nome.innerHTML = name
+    recentItemInfo.appendChild(nome)
+    let recentItemPreco = document.createElement("span")
+    recentItemPreco.classList.add("preco")
+    recentItemPreco.innerHTML = "R$"+preco+",00"
+    recentItemInfo.appendChild(recentItemPreco)
+    recentItemInfo.appendChild(document.createElement("br"))
+    eltRecentItem.appendChild(recentItemInfo)
+    document.getElementById("recentItems").appendChild(eltRecentItem)
+}
+
+function putRecentItemsMP(){
+    try{
+    document.getElementById("recentItems").innerHTML = ""
+    for(let i=0; i<user.recentItems.length; i++){
+        putRecentItemMP(products[getProductIndexById(user.recentItems[i])].name, products[getProductIndexById(user.recentItems[i])].imagem, products[getProductIndexById(user.recentItems[i])].preco)
+    }
+    }catch(e){
+        console.log(e)
+    }
+}
+
+function displayMyMarketplaceProduct(id){
+    let marketplaceMyProduct = document.createElement("div")
+    marketplaceMyProduct.classList.add("marketplaceProduct")
+    let imgProduct = document.createElement("img")
+    imgProduct.src = products[getProductIndexById(id)].imagem
+    imgProduct.classList.add("imgProduct")
+    marketplaceMyProduct.appendChild(imgProduct)
+    let productInfo = document.createElement("div")
+    productInfo.classList.add("productInfo")
+    let nomeComida = document.createElement("span")
+    nomeComida.classList.add("nomeComida")
+    nomeComida.innerHTML = products[getProductIndexById(id)].name
+    productInfo.appendChild(nomeComida)
+    productInfo.appendChild(document.createElement("br"))
+    let preco = document.createElement("span")
+    preco.classList.add("preco")
+    preco.innerHTML = "R$"+products[getProductIndexById(id)].preco+",00"
+    productInfo.appendChild(preco)
+    productInfo.appendChild(document.createElement("br"))
+    let totalSales = document.createElement("span")
+    totalSales.classList.add("totalSales")
+    totalSales.innerHTML = products[getProductIndexById(id)].vendas + " Vendas Realizadas"
+    productInfo.appendChild(totalSales)
+    productInfo.appendChild(document.createElement("br"))
+    let a = document.createElement("span")
+    let definedStockBool = true
+    let toggleStock = document.createElement("img")
+    if(products[getProductIndexById(id)].definedStock){
+        toggleStock.src = "toggle.png"
+        definedStockBool = true
+    }else{
+        toggleStock.src = "toggle2.png"
+        definedStockBool = false
+    }
+    toggleStock.classList.add("toggleStock")
+    toggleStock.addEventListener("click", ()=>{
+        if(toggleStock.src.includes("toggle.png")){
+            toggleStock.src = "toggle2.png"
+            socket.emit("toggleStock", id, false)
+            definedStockBool = false
+            stockControlDiv.style.display = "none"
+            b.style.display = "none"
+        }else{
+            toggleStock.src = "toggle.png"
+            socket.emit("toggleStock", id, true)
+            definedStockBool = true
+            stockControlDiv.style.display = "flex"
+            b.style.display = "block"
+        }
+    })
+    let definedStock = document.createElement("span")
+    definedStock.innerHTML = "Estoque Definido"
+    let undefinedStock = document.createElement("span")
+    undefinedStock.innerHTML = "Estoque Indefinido"
+    a.appendChild(definedStock)
+    a.appendChild(toggleStock)
+    a.appendChild(undefinedStock)
+
+    productInfo.appendChild(a)
+    let b = document.createElement("span")
+    b.innerHTML = "Estoque Restante:"
+    if(!definedStockBool){
+        b.style.display = "none"
+    }
+    productInfo.appendChild(b)
+    let stockControlDiv = document.createElement("div")
+    stockControlDiv.classList.add("stockControlDiv")
+    if(!definedStockBool){
+        stockControlDiv.style.display = "none"
+    }
+    let minusStock = document.createElement("img")
+    minusStock.src = "minusBlack.png"
+    minusStock.classList.add("minusStock")
+    minusStock.addEventListener("click", ()=>{
+        if(products[getProductIndexById(id)].stock > 0){
+            products[getProductIndexById(id)].stock--
+            socket.emit("stockControl", id, -1)
+            lastingStock.innerHTML = products[getProductIndexById(id)].stock
+        }
+    })
+    stockControlDiv.appendChild(minusStock)
+    let lastingStock = document.createElement("span")
+    lastingStock.classList.add("lastingStock")
+    lastingStock.innerHTML = products[getProductIndexById(id)].stock
+    stockControlDiv.appendChild(lastingStock)
+    let plusStock = document.createElement("img")
+    plusStock.src = "plusBlack.png"
+    plusStock.classList.add("plusStock")
+    plusStock.addEventListener("click", ()=>{
+        products[getProductIndexById(id)].stock++
+        socket.emit("stockControl", id, 1)
+        lastingStock.innerHTML = products[getProductIndexById(id)].stock
+    })
+    stockControlDiv.appendChild(plusStock)
+    productInfo.appendChild(stockControlDiv)
+    productInfo.appendChild(document.createElement("br"))
+    let marketplaceDeleteProduct = document.createElement("img")
+    marketplaceDeleteProduct.src = "trash.png"
+    marketplaceDeleteProduct.classList.add("marketplaceDeleteProduct")
+    marketplaceDeleteProduct.addEventListener("click", ()=>{
+        let confimation = confirm("Você tem certeza que deseja deletar este produto?")
+            if(confimation){
+                marketplaceMyProduct.display = "none"
+                socket.emit("deleteMarketplaceProduct", id)
+            }
+    })
+    productInfo.appendChild(marketplaceDeleteProduct)
+    marketplaceMyProduct.appendChild(productInfo)
+    document.getElementById("marketplaceMyProducts").appendChild(marketplaceMyProduct)
+}
+
+
+function displayMyProducts(){
+    document.getElementById("marketplaceMyProducts").innerHTML = ""
+    let addProduct = document.createElement("img")
+    addProduct.src = "addProduct.png"
+    addProduct.id = "addProduct"
+    addProduct.style.width = "90%"
+    addProduct.addEventListener("click", ()=>{
+        let ctz = confirm("Você tem certeza que deseja criar um produto?")
+    if(ctz){
+        let productName = prompt("Qual será o nome do produto?")
+        if(productName==null){
+            productName = alert("Nome inválido")
+        }else{
+            let productPrice = prompt("Quanto deseja receber com cada venda?")
+            if(productPrice==null){
+                productPrice = alert("Preço inválido")
+            }else{
+                alert("O preço do produto será de R$"+Math.round(productPrice*1.1+1)+",00")
+                let productDescription = prompt("Qual será a descrição do produto?")
+                if(productDescription==null){
+                    productDescription = alert("Descrição inválida")
+                }else{
+                    let productImage = prompt("Digite o link do arquivo da imagem do produto")
+                    if(productImage==null){
+                        productImage = alert("Imagem inválida")
+                    }else{
+                        socket.emit("createProduct", {
+                            name: productName,
+                            preco: productPrice,
+                            desc: productDescription,
+                            imagem: productImage
+                        }, user.id)
+                        alert("Produto criado com sucesso!")
+                    }
+                }
+            }
+        }
+    }
+    })
+    marketplaceMyProducts.appendChild(addProduct)
+    marketplaceMyProducts.appendChild(document.createElement("br"))
+    for(let i=0; i<products.length; i++){
+        if(products[i].ownerId == user.id){
+            displayMyMarketplaceProduct(products[i].id)
+        }
+    }
+}
+
+function putArrayInTimeOrder(array){
+    let newArray = []
+    for(let i=0; i<array.length; i++){
+        newArray.push(array[i])
+    }
+    for(let i=0; i<newArray.length; i++){
+        for(let j=0; j<newArray.length; j++){
+            if(newArray[i].time < newArray[j].time){
+                let temp = newArray[i]
+                newArray[i] = newArray[j]
+                newArray[j] = temp
+            }
+        }
+    }
+    return newArray
+}
+
+function invertTimeArray(array){
+    let newArray = []
+    for(let i=0; i<array.length; i++){
+        newArray.push(array[i])
+    }
+    for(let i=0; i<newArray.length; i++){
+        for(let j=0; j<newArray.length; j++){
+            if(newArray[i].time > newArray[j].time){
+                let temp = newArray[i]
+                newArray[i] = newArray[j]
+                newArray[j] = temp
+            }
+        }
+    }
+    return newArray
+}
+
+function garanteeDoubleDigits(number){
+    if(number < 10){
+        return "0"+number
+    }else{
+        return number
+    }
+}
+
+function getTimeAndDateFromMiliseconds(miliseconds){
+    let date = new Date(miliseconds)
+    let hours = date.getHours()
+    let minutes = date.getMinutes()
+    let day = date.getDate()
+    let month = date.getMonth()+1
+    return ""+garanteeDoubleDigits(hours)+":"+garanteeDoubleDigits(minutes) + " do dia " + garanteeDoubleDigits(day)+"/"+garanteeDoubleDigits(month)
+}
+
+function displayLastSales(){
+    let ul = document.getElementById("lastSales")
+    ul.innerHTML = ""
+    let lastSales = []
+    for (let i = 0; i < products.length; i++) {
+        if(products[i].ownerId == user.id){
+            for (let o = 0; o < products[i].lastSales.length; o++) {
+                lastSales.push(products[i].lastSales[o])
+            }
+        }
+    }
+    lastSales = putArrayInTimeOrder(lastSales)
+    lastSales = invertTimeArray(lastSales)
+    for(let i=0; i<lastSales.length; i++){
+        let newElt = document.createElement("li")
+        newElt.innerHTML = lastSales[i].username + " comprou um(a) " + products[getProductIndexById(lastSales[i].productid)].name+"(R$"+products[getProductIndexById(lastSales[i].productid)].preco+",00) às "+ getTimeAndDateFromMiliseconds(lastSales[i].time)+". Obs.: "+ lastSales[i].obs+"."
+        ul.appendChild(newElt)
+        ul.appendChild(document.createElement("br"))
     }
 }
 
@@ -317,6 +685,14 @@ function displayAlert(message, good=true){
         notificationDiv.style.display = "none"
     }, 5000)
 
+}
+
+function getProductIndexById(id){
+    for(let i=0; i<products.length; i++){
+        if(products[i].id==id){
+            return i
+        }
+    }
 }
 
 login.addEventListener("click", ()=>{
@@ -440,6 +816,97 @@ buyTicket.addEventListener("click", ()=>{
 })
 */
 
+document.getElementById("menuOddFood").addEventListener("click", ()=>{
+    document.getElementById("menuOddFood").style.backgroundColor="black"
+    document.getElementById("menuOddFoodText").style.color="white"
+    document.getElementById("menuMarketplace").style.backgroundColor="#f2f2f2"
+    document.getElementById("menuMarketplaceText").style.color="black"
+    document.getElementById("comidas").style.display="block"
+    document.getElementById("marketplace").style.display="none"
+})
+
+document.getElementById("menuMarketplace").addEventListener("click", ()=>{
+    document.getElementById("menuMarketplace").style.backgroundColor="black"
+    document.getElementById("menuMarketplaceText").style.color="white"
+    document.getElementById("menuOddFood").style.backgroundColor="#f2f2f2"
+    document.getElementById("menuOddFoodText").style.color="black"
+    document.getElementById("comidas").style.display="none"
+    document.getElementById("marketplace").style.display="flex"
+})
+
+document.getElementById("marketplaceProductLook").addEventListener("click", ()=>{
+    clickedInsideMarketplaceProduct = true
+    setTimeout(()=>{
+        clickedInsideMarketplaceProduct = false
+    }, 100)
+})
+
+document.getElementById("marketplaceEntireScreen").addEventListener("click", ()=>{
+    setTimeout(()=>{
+        if(!clickedInsideMarketplaceProduct){
+            document.getElementById("marketplaceEntireScreen").style.display="none"
+        }
+    }, 10)
+})
+
+document.getElementById("plusMarketplaceButton").addEventListener("click", ()=>{
+    document.getElementById("plusMarketplaceButton").style.animation= "enlarge 1s"
+    document.getElementById("daBarra").style.animation= "fade 1s"
+    setTimeout(()=>{
+        document.getElementById("plusMarketplaceButton").style.animation= "none"
+        document.getElementById("tela2").style.display="none"
+        document.getElementById("tela4").style.display="block"
+        document.getElementById("tela4content").style.animation="appear 0.5s"
+        document.getElementById("daBarra").style.animation= "none"
+        
+    }, 990)
+})
+
+document.getElementById("backArrowMP").addEventListener("click", ()=>{
+    document.getElementById("backArrowMP").style.animation="enlarge2 1s"
+    document.getElementById("tela4content").style.animation="fade 1s"
+    setTimeout(()=>{
+        document.getElementById("tela4").style.display="none"
+        document.getElementById("tela2").style.display="block"
+        document.getElementById("tela4content").style.animation= "none"
+        document.getElementById("backArrowMP").style.animation="none"
+    }, 990)
+})
+
+document.getElementById("addProduct").addEventListener("click", ()=>{
+    let ctz = confirm("Você tem certeza que deseja criar um produto?")
+    if(ctz){
+        let productName = prompt("Qual será o nome do produto?")
+        if(productName==null){
+            productName = alert("Nome inválido")
+        }else{
+            let productPrice = prompt("Quanto deseja receber com cada venda?")
+            if(productPrice==null){
+                productPrice = alert("Preço inválido")
+            }else{
+                alert("O preço do produto será de R$"+Math.round(productPrice*1.1+1)+",00")
+                let productDescription = prompt("Qual será a descrição do produto?")
+                if(productDescription==null){
+                    productDescription = alert("Descrição inválida")
+                }else{
+                    let productImage = prompt("Digite o link do arquivo da imagem do produto")
+                    if(productImage==null){
+                        productImage = alert("Imagem inválida")
+                    }else{
+                        socket.emit("createProduct", {
+                            name: productName,
+                            preco: productPrice,
+                            desc: productDescription,
+                            imagem: productImage
+                        }, user.id)
+                        alert("Produto criado com sucesso!")
+                    }
+                }
+            }
+        }
+    }
+})
+
 socket.on("loginState", data=>{
     if(data.state == "Success"){
         user = data.userInfo
@@ -447,6 +914,13 @@ socket.on("loginState", data=>{
         putFoods()
         updateCart()
         updatePending()
+        setTimeout(()=>{
+            if(user.recentItems!=undefined){
+                putRecentItemsMP()
+                displayMyProducts()
+                displayLastSales()
+            }
+        }, 100)
         setTimeout(()=>{
             displayBalance()
             changePage(2)
@@ -476,6 +950,15 @@ socket.on("regState", data=>{
 
 socket.on("updateUser", data=>{
     user = data
+    putFoods()
+    updateCart()
+    updatePending()
+    if(user.recentItems!=undefined){
+        putRecentItemsMP()
+        displayMyProducts()
+        displayLastSales()
+    }
+    displayBalance()
     socket.emit("getDay", true)
 })
 
@@ -500,6 +983,23 @@ socket.on("day", dia=>{
         putFoods()
     }
     sendingDay.innerText = "Entrega: " + days[day]
+})
+
+socket.on("buyMarketplaceProductAnswer", answer=>{
+    if(answer){
+        displayAlert("Compra realizada com sucesso", true)
+        displayBalance()
+        setTimeout(()=>{
+            putRecentItemsMP()
+        }, 500)
+    }else{
+        displayAlert("Não foi possível comprar o produto", false)
+    }
+})
+
+socket.on("getMPProducts", productss=>{
+    products = productss
+    displayMarketplaceProducts()
 })
 
 /* TICKET

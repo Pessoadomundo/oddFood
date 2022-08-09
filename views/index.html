@@ -52,6 +52,14 @@
             </div>
         </div>
             <div id="container">
+                <div id="menuSelect">
+                    <div id="menuOddFood">
+                        <span id="menuOddFoodText">OddFood</span>
+                    </div>
+                    <div id="menuMarketplace">
+                        <span id="menuMarketplaceText">Marketplace</span>
+                    </div>
+                </div>
                 <!--
                 <div id="ingressos">
                     <div id="ingresso" class="comida">
@@ -69,6 +77,36 @@
                 -->
                 <div id="comidas">
                     <!--<h1>Comidas</h1> -->
+                </div>
+                <div id="marketplace" style="display:none;">
+                    <div id="marketplaceColumn1">
+
+                    </div>
+                    <div id="marketplaceColumn2">
+                        
+                    </div>
+                    <span></span>
+                    <button id="plusMarketplaceButton">+</button>
+                </div>
+            </div>
+            <!--Make a div with fixed position on the middle of the screen. It will have the product image, title, description and a button to buy it-->
+            <div id="marketplaceEntireScreen">
+                <div id="marketplaceProductLook">
+                    <div id="marketplaceProductImgDivLook">
+                        <img id="marketplaceProductImgLook" src="./pratos/ingresso.jpg">
+                    </div>
+                    <div id="marketplaceProductInfoLook">
+                        <br>
+                        <span id="marketplaceProductNameLook"></span>
+                        <br><br>
+                        <span id="marketplaceProductDescriptionLook"></span>
+                        <br><br>
+                        <span id="marketplaceProductPriceLook"></span>
+                        <br><br>
+                        <input type="text" id="marketplaceProductObservationsLook" placeholder="Observações">
+                        <br><br>
+                        <button id="marketplaceProductBuyLook">Comprar</button>
+                    </div>
                 </div>
             </div>
 
@@ -90,6 +128,11 @@
                 <h1>Pedidos pendentes:</h1>
                 <div id="pendingItems">
 
+                </div>
+                <br><br>
+                <h1 style="font-size: 1.8em;">Compras no Marketplace:</h1>
+                <div id="recentItems">
+                
                 </div>
             </div>
 
@@ -124,6 +167,26 @@
         <img id="trianglin" src="trianglin.png">
         <div id="foodInfo">
             <p id="foodInfoText"></p>
+        </div>
+    </div>
+
+    <div id="tela4">
+        <div id="tela4content">
+            <img id="backArrowMP" src="backArrow.png">
+            <h6 id="saldoMarketplace">Saldo: R$0,00</h6>
+            <h1 id="marketplaceTitle">OddFood Marketplace</h1>
+            <div id="marketplaceMyProductsDiv">
+                <h2 id="marketplaceMyProductsTitle">Meus Produtos</h2>
+                <div id="marketplaceMyProducts">
+                    <img src="addProduct.png" id="addProduct" style="width: 90%;">
+                </div>
+            </div>
+            <div id="lastSalesDiv">
+                <h2 style="width: 100%; text-align:center;">Últimas Vendas</h2>
+                <ul id="lastSales">
+                    <li></li>
+                </ul>
+            </div>
         </div>
     </div>
 
@@ -343,7 +406,7 @@
         #comidas{
             width: 100%;
             height: 100%;
-            margin-top: 23%;
+            margin-top: 7%;
             margin-bottom: 30%;
         }
         .comida{
@@ -593,6 +656,268 @@
         #divInfoIngresso{
             text-align: center;
         }
+        #menuSelect{
+            display: flex;
+            margin-top: 20%;
+            width: 100%;
+            font-size: 3vh;
+            text-align: center;
+            height: 5vh;
+            font-weight: bolder;
+            background-color: #f2f2f2;
+        }
+        #menuOddFood{
+            width: 50%;
+            height: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: black;
+            color: white;
+        }
+        #menuMarketplace{
+            width: 50%;
+            height: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        #moreInfoProduct{
+            background-color: black;
+            border: black solid 1px;
+            color: white;
+            border-radius: 20px;
+            margin-top: 5%;
+        }
+        #marketplace{
+            width: 100%;
+            height: 100%;
+            margin-top: 7%;
+            margin-bottom: 30%;
+            display: flex;
+        }
+        #marketplaceColumn1{
+            width: 50%;
+            height: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        #marketplaceColumn2{
+            width: 50%;
+            height: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .marketplaceProduct{
+            width: 96%;
+            height: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #f2f2f2;
+            border-radius: 10%;
+            margin-bottom: 10%;
+            color: black;
+        }
+        .imgProduct{
+            width: 100%;
+            border-radius: 10%;
+        }
+        .productInfo{
+            width: 100%;
+            height: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        #marketplaceEntireScreen{
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            display: none;
+            top: 0px;
+            left: 0px;
+            background-color: rgba(0,0,0,0.5);
+        }
+        /*this div will be centered in the middle of the screen. This div will have a white background and round borders. First it will have an image of the product that will ocupy the entire upper part of the image. Below it, there will be the title of the product with a large font and bolder text. Below it, there will be the description of the product; it will ocupy 90% of the width of the image. Below it, there will be the price of the product and, on its side, a button to buy it. The buy button will be black with white text"*/
+        #marketplaceProductLook{
+            width: 90%;
+            height: 60%;
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+            background-color: white;
+            border-radius: 10%;
+            margin-top: 10%;
+            text-align: center;
+        }
+        #marketplaceProductImgDivLook{
+            width: 100%;
+            height: 30%;
+            display: block;
+        }
+        #marketplaceProductImgLook{
+            max-width: 80%;
+            height: 100%;
+            border-radius: 10%;
+        }
+        #marketplaceProductInfoLook{
+            width: 90%;
+            height: 50%;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+            
+        }
+        #marketplaceProductNameLook{
+            font-size: 3vh;
+            font-weight: bolder;
+            margin-top: 5%;
+        }
+        #marketplaceProductDescriptionLook{
+            margin-top: 5%;
+            font-size: 2vh;
+        }
+        #marketplaceProductPriceLook{
+            font-size: 2.5vh;
+            font-weight: bold;
+        }
+        #marketplaceProductObservationsLook{
+            font-size: 1vh;
+            height: 3vh;
+            width: 95%;
+        }
+        #marketplaceProductBuyLook{
+            background-color: black;
+            border: black solid 1vh;
+            border-radius: 0.5vh;
+            color: white;
+        }
+        #marketplaceProductBuyLook:hover{
+            background-color: #c03f3f;
+            border-color: #c03f3f;
+        }
+        .recentItem{
+            width: 100%;
+            height: 20vh;
+            border-bottom: grey 1px solid; 
+            display: flex;
+        }
+        #plusMarketplaceButton{
+            position: fixed;
+            color: white;
+            text-align: center;
+            background-color: black;
+            border: black solid 10%;
+            border-radius: 50%;
+            width: 7vh;
+            height: 7vh;
+            font-size: 3rem;
+            right: 5%;
+            bottom: 20%;
+        }
+        #tela4{
+            display: none;
+            background-color: black;
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: 100%;
+            color: white;
+            overflow-y: scroll;
+            overflow-x: hidden;
+        }
+        #saldoMarketplace{
+            color: white;
+            font-size: 2vh;
+            font-weight: bolder;
+            position: absolute;
+            right: 5%;
+            top: -2%;
+        }
+        #marketplaceTitle{
+            color: white;
+            font-size: 5vh;
+            font-weight: bolder;
+            margin-top: 23%;
+        }
+        #backArrowMP{
+            position: absolute;
+            left: 5%;
+            top: 2.5%;
+            width: 3vh;
+        }
+        #marketplaceMyProductsDiv{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin-top: 10%;
+        }
+        #marketplaceMyProducts{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .marketplaceDeleteProduct{
+            width: 7%;
+            background-color: #c03f3f;
+            border: #c03f3f solid 0.8vh;
+            border-radius: 40%;
+            margin-bottom: 7%;
+        }
+        .toggleStock{
+            width: 3vh;
+        }
+        .stockControlDiv{
+            /*Make every element inside it be in the same line*/
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            margin-top: 5%;
+        }
+        .lastingStock{
+            
+        }
+        #lastSalesDiv{
+            color: white;
+            margin-bottom: 20%;
+        }
+        .minusStock{
+            width: 3vh;
+        }
+        .plusStock{
+            width: 3vh;
+        }
         @keyframes tela13{
             from {opacity: 100%;border-bottom: black solid 0px;}
             to {opacity: 0%; border-bottom: black solid 10vh;}
@@ -601,7 +926,30 @@
             from {opacity: 0%;}
             to {opacity: 100%;}
         }
-        
+        @keyframes rotate{
+            from {transform: rotate(0deg);color: white;background-color: black;}
+            to {transform: rotate(45deg);color: black;background-color: white;}
+        }
+        @keyframes rotateBack{
+            from {transform: rotate(45deg);color: black;background-color: white;}
+            to {transform: rotate(0deg);color: white;background-color: black;}
+        }
+        @keyframes enlarge{
+            from {color: white; width: 7vh;height: 7vh;transform: translate(0vh,0vh);}
+            to {color: black; width: 207vh;height: 207vh;transform: translate(100vh,100vh);}
+        }
+        @keyframes enlarge2{
+            from {width: 3vh;transform: translate(0vh,0vh);}
+            to {width: 203vh;transform: translate(-50vh,-50vh);}
+        }
+        @keyframes fade{
+            from {opacity: 100%;}
+            to {opacity: 0%;}
+        }
+        @keyframes appear{
+            from {opacity: 0%;}
+            to {opacity: 100%;}
+        }
         
         
     </style>
