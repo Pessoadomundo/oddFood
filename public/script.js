@@ -851,7 +851,8 @@ document.getElementById("marketplaceEntireScreen").addEventListener("click", ()=
 
 document.getElementById("plusMarketplaceButton").addEventListener("click", ()=>{
     document.getElementById("plusMarketplaceButton").style.animation= "enlarge 1s"
-    document.getElementsByTagName("body")[0].style.backgroundColor="black"
+    document.getElementsByTagName("body")[0].style.animation= "whiteToBlack 1s"
+
     document.getElementById("daBarra").style.animation= "fade 1s"
     setTimeout(()=>{
         document.getElementById("plusMarketplaceButton").style.animation= "none"
@@ -859,19 +860,20 @@ document.getElementById("plusMarketplaceButton").addEventListener("click", ()=>{
         document.getElementById("tela4").style.display="block"
         document.getElementById("tela4content").style.animation="appear 0.5s"
         document.getElementById("daBarra").style.animation= "none"
-        
+        document.getElementsByTagName("body")[0].style.backgroundColor="black"
     }, 990)
 })
 
 document.getElementById("backArrowMP").addEventListener("click", ()=>{
     document.getElementById("backArrowMP").style.animation="enlarge2 1s"
     document.getElementById("tela4content").style.animation="fade 1s"
-    document.getElementsByTagName("body")[0].style.backgroundColor="white"
+    document.getElementsByTagName("body")[0].style.animation= "blackToWhite 1s"
     setTimeout(()=>{
         document.getElementById("tela4").style.display="none"
         document.getElementById("tela2").style.display="block"
         document.getElementById("tela4content").style.animation= "none"
         document.getElementById("backArrowMP").style.animation="none"
+        document.getElementsByTagName("body")[0].style.backgroundColor="white"
     }, 990)
 })
 
