@@ -563,12 +563,12 @@ function displayMyProducts(){
         if(productName==null){
             productName = alert("Nome inválido")
         }else{
-            let productPrice = prompt("Quanto deseja receber com cada venda?")
+            let productPrice = prompt("Quanto deseja receber com cada venda? (Apenas use números inteiros e não coloque R$)")
             if(productPrice==null){
                 productPrice = alert("Preço inválido")
             }else{
-                alert("O preço do produto será de R$"+Math.round(productPrice*1.1+1)+",00")
-                let productDescription = prompt("Qual será a descrição do produto?")
+                alert("O preço do produto será de R$"+Math.round(productPrice*1.1+1)+",00 para os compradores")
+                let productDescription = prompt("Qual será a descrição do produto? (Coloque informações como seu nome e local de entrega caso seja um produto físico)")
                 if(productDescription==null){
                     productDescription = alert("Descrição inválida")
                 }else{
@@ -919,9 +919,9 @@ socket.on("loginState", data=>{
         updateCart()
         updatePending()
         setTimeout(()=>{
+            displayMyProducts()
             if(user.recentItems!=undefined){
                 putRecentItemsMP()
-                displayMyProducts()
                 displayLastSales()
             }
         }, 100)
@@ -957,9 +957,9 @@ socket.on("updateUser", data=>{
     putFoods()
     updateCart()
     updatePending()
+    displayMyProducts()
     if(user.recentItems!=undefined){
         putRecentItemsMP()
-        displayMyProducts()
         displayLastSales()
     }
     displayBalance()
