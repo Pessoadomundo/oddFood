@@ -57,9 +57,9 @@ let tuText = document.getElementById("tuText")
 let sauce = document.getElementById("sauce")
 let sendingDay = document.getElementById("sendingDay")
 
-//TICKET
-/////let divIngressos = document.getElementById("ingressos")
-/////let buyTicket = document.getElementById("buyTicket")
+
+let divIngressos = document.getElementById("ingressos")
+let buyTicket = document.getElementById("buyTicket")
 
 var clickedInsideMarketplaceProduct = false
 
@@ -799,7 +799,6 @@ document.getElementsByTagName('body')[0].onscroll = () => {
     document.getElementById("foodInfoDiv").style.display="none"
 }
 
-/* TICKET
 buyTicket.addEventListener("click", ()=>{
     if(lote!=999){
         let confimation = confirm("Você tem certeza que deseja usar R$"+precoIngresso+",00 para comprar o ingresso?")
@@ -814,7 +813,6 @@ buyTicket.addEventListener("click", ()=>{
         displayAlert("Vendas encerradas", false)
     }
 })
-*/
 
 document.getElementById("menuOddFood").addEventListener("click", ()=>{
     document.getElementById("menuOddFood").style.backgroundColor="black"
@@ -822,6 +820,7 @@ document.getElementById("menuOddFood").addEventListener("click", ()=>{
     document.getElementById("menuMarketplace").style.backgroundColor="#f2f2f2"
     document.getElementById("menuMarketplaceText").style.color="black"
     document.getElementById("comidas").style.display="block"
+    document.getElementById("ingressos").style.display="flex"
     document.getElementById("marketplace").style.display="none"
 })
 
@@ -831,6 +830,7 @@ document.getElementById("menuMarketplace").addEventListener("click", ()=>{
     document.getElementById("menuOddFood").style.backgroundColor="#f2f2f2"
     document.getElementById("menuOddFoodText").style.color="black"
     document.getElementById("comidas").style.display="none"
+    document.getElementById("ingressos").style.display="none"
     document.getElementById("marketplace").style.display="flex"
 })
 
@@ -930,11 +930,9 @@ socket.on("loginState", data=>{
             changePage(2)
             tela2.style.animation= "animation2 1s";
         }, 2000)
-        /*TICKET
         if(user.hasTicket){
             document.getElementById("buyTicket").style.backgroundColor = "#61e03a"
         }
-        */
     }else if(data.state == "Fail"){
         result.innerText = "Usuário e/ou senha incorretos"
     }
@@ -1006,7 +1004,6 @@ socket.on("getMPProducts", productss=>{
     displayMarketplaceProducts()
 })
 
-/* TICKET
 socket.on("ticketAnswer", confirmation =>{
     if(confirmation){
         displayAlert("Ingresso comprado com sucesso!")
@@ -1024,23 +1021,20 @@ socket.on("ticketPriceAnswer", data=>{
     precoIngresso = data.precoIngresso
     lote = data.lote
     document.getElementById("precoIngresso").innerHTML = "R$"+precoIngresso+",00"
-    document.getElementById("nomeIngresso").innerHTML = "OddParty Junina <br>("+lote+"º Lote)"
+    document.getElementById("nomeIngresso").innerHTML = "Halloween do Terceirão  <br>("+lote+"º Lote)"
     if(lote==999){
         document.getElementById("precoIngresso").innerHTML = "Vendas encerradas"
-        document.getElementById("nomeIngresso").innerHTML = "OddParty Junina"
+        document.getElementById("nomeIngresso").innerHTML = "Halloween do Terceirão "
         document.getElementById("buyTicket").style.backgroundColor = "#c42421"
     }
 })
-*/
 async function a(){
     setInterval(()=>{
         socket.emit("askUser", user.id)
-        /*TICKET
         socket.emit("getTicketPrice")
         if(user.hasTicket){
             document.getElementById("buyTicket").style.backgroundColor = "#61e03a"
         }
-        */
         displayBalance()
         updateCart()
     },10000)
